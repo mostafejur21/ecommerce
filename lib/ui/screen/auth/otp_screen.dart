@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:ecommerce/ui/screen/auth/complete_profile_screen.dart';
+import 'package:ecommerce/ui/utils/app_color.dart';
 import 'package:ecommerce/ui/utils/custom_otp_field.dart';
 import 'package:ecommerce/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,31 @@ class OtpVerificationScreen extends StatefulWidget {
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  int timeLeft = 120;
+  bool wait = false;
+
+  void startTimer() {
+    const sec = Duration(seconds: 1);
+    Timer timer = Timer.periodic(sec, (timer) {
+      if (timeLeft == 0) {
+        setState(() {
+          timer.cancel();
+          wait = false;
+        });
+      } else {
+        setState(() {
+          timeLeft--;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +99,30 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   },
                   child: const Text("Next"),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(color: Colors.grey),
+                  children: [
+                    const TextSpan(text: "This code will expire in "),
+                    TextSpan(
+                        text: "${timeLeft}s",
+                        style: const TextStyle(
+                            color: AppColor.primaryColor,
+                            fontWeight: FontWeight.bold))
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "Resend",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
             ],
           ),
         ),
