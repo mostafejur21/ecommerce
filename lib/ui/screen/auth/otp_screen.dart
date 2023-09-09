@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:ecommerce/ui/screen/auth/complete_profile_screen.dart';
-import 'package:ecommerce/ui/screen/home_screen.dart';
 import 'package:ecommerce/ui/utils/app_color.dart';
-import 'package:ecommerce/ui/utils/custom_otp_field.dart';
+import 'package:ecommerce/ui/widgets/custom_otp_field.dart';
 import 'package:ecommerce/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({super.key});

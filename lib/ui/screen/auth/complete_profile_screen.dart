@@ -62,9 +62,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   TextFormField(
                     validator: (value) {
                       if (value!.isEmpty ||
-                          !RegExp(r'^[\w-.]+@([\w-]+\.)+\w{2,5}')
-                              .hasMatch(value)) {
-                        return "please Enter your correct Email";
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                        return "please Enter your first name";
                       } else {
                         return null;
                       }
@@ -77,9 +76,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   TextFormField(
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty)
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
                       {
-                        return "please Enter your correct Email";
+                        return "please Enter your last name";
                       } else {
                         return null;
                       }},
@@ -92,7 +92,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   TextFormField(
                     validator: (value) {
                       if (value!.isEmpty ||
-                          !RegExp(r'/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/')
+                          !RegExp(r'^[0-9]{11}$') /*this is another regex validation for number (r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')*/
                               .hasMatch(value)) {
                         return "please Enter your correct phone Number";
                       } else {
@@ -125,11 +125,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        _firstNameTEController.clear();
+                        /*_firstNameTEController.clear();
                         _lastNameTEController.clear();
                         _cityTEController.clear();
                         _mobileTEController.clear();
-                        _shippingAddressTEController.clear();
+                        _shippingAddressTEController.clear();*/
                         if(_formKey.currentState!.validate()){
                           Get.to(const HomeScreen());
                         }
