@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:ecommerce/ui/screen/auth/complete_profile_screen.dart';
+import 'package:ecommerce/ui/screen/home_screen.dart';
 import 'package:ecommerce/ui/utils/app_color.dart';
 import 'package:ecommerce/ui/utils/custom_otp_field.dart';
 import 'package:ecommerce/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({super.key});
@@ -16,7 +18,10 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _otpController1 = TextEditingController();
+  final TextEditingController _otpController2 = TextEditingController();
+  final TextEditingController _otpController3 = TextEditingController();
+  final TextEditingController _otpController4 = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -85,7 +90,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               Form(
                 key: _formKey,
                 child: CustomOtpField(
-                  otpController: _otpController,
+                  otpController1: _otpController1,
+                  otpController2: _otpController2,
+                  otpController3: _otpController3,
+                  otpController4: _otpController4,
                 ),
               ),
               const SizedBox(
@@ -95,7 +103,25 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.offAll(const CompleteProfileScreen());
+                    if (_otpController1.text.isEmpty &&
+                        _otpController2.text.isEmpty &&
+                        _otpController3.text.isEmpty &&
+                        _otpController4.text.isEmpty) {
+                      Get.showSnackbar(
+                        const GetSnackBar(
+                          title: "Error",
+                          message: "Enter the correct otp",
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    } else {
+                      Get.to(const CompleteProfileScreen());
+                    }
+                    _otpController1.clear();
+                    _otpController2.clear();
+                    _otpController3.clear();
+                    _otpController4.clear();
+                    // Get.offAll(const CompleteProfileScreen());
                   },
                   child: const Text("Next"),
                 ),

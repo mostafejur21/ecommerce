@@ -60,6 +60,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 24,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[\w-.]+@([\w-]+\.)+\w{2,5}')
+                              .hasMatch(value)) {
+                        return "please Enter your correct Email";
+                      } else {
+                        return null;
+                      }
+                    },
                     controller: _firstNameTEController,
                     decoration: const InputDecoration(labelText: "First Name"),
                   ),
@@ -67,6 +76,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 16,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty)
+                      {
+                        return "please Enter your correct Email";
+                      } else {
+                        return null;
+                      }},
                     controller: _lastNameTEController,
                     decoration: const InputDecoration(labelText: "Last Name"),
                   ),
@@ -74,6 +90,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 16,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/')
+                              .hasMatch(value)) {
+                        return "please Enter your correct phone Number";
+                      } else {
+                        return null;
+                      }},
                     controller: _mobileTEController,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(labelText: "Mobile"),
@@ -106,8 +130,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         _cityTEController.clear();
                         _mobileTEController.clear();
                         _shippingAddressTEController.clear();
-                        if(_formKey.currentState != null){
-                          Get.offAll(const HomeScreen());
+                        if(_formKey.currentState!.validate()){
+                          Get.to(const HomeScreen());
                         }
                       },
                       child: const Text("Complete"),
