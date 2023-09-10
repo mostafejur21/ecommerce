@@ -1,9 +1,8 @@
 import 'dart:async';
-
-import 'package:ecommerce/ui/screen/auth/complete_profile_screen.dart';
-import 'package:ecommerce/ui/utils/app_color.dart';
-import 'package:ecommerce/ui/widgets/custom_otp_field.dart';
-import 'package:ecommerce/ui/utils/images_utils.dart';
+import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
+import 'package:ecommerce/presentation/ui/utils/app_color.dart';
+import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
+import 'package:ecommerce/presentation/ui/widgets/custom_otp_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -33,6 +32,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   void startTimer() {
     const sec = Duration(seconds: 1);
+    // ignore: unused_local_variable
     Timer timer = Timer.periodic(sec, (timer) {
       if (timeLeft == 0) {
         setState(() {

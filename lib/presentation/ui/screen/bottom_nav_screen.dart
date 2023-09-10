@@ -1,9 +1,10 @@
-import 'package:ecommerce/ui/screen/cart_screen.dart';
-import 'package:ecommerce/ui/screen/categories_screen.dart';
-import 'package:ecommerce/ui/screen/home_screen.dart';
-import 'package:ecommerce/ui/screen/wish_list_screen.dart';
-import 'package:ecommerce/ui/utils/app_color.dart';
+import 'package:ecommerce/presentation/ui/screen/cart_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/home_screen.dart';
+import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
+
+import 'wish_list_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});

@@ -1,6 +1,5 @@
-//import 'package:ecommerce/ui/screen/auth/email_verification_screen.dart';
-import 'package:ecommerce/ui/screen/bottom_nav_screen.dart';
-import 'package:ecommerce/ui/utils/images_utils.dart';
+import 'package:ecommerce/presentation/ui/screen/bottom_nav_screen.dart';
+import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
-import 'package:ecommerce/ui/screen/splash_screen.dart';
-import 'package:ecommerce/ui/utils/app_color.dart';
+import 'package:ecommerce/presentation/ui/screen/splash_screen.dart';
+import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
