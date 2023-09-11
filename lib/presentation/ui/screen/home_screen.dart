@@ -1,11 +1,19 @@
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_carousel_slider.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_screen_search_bar.dart';
+import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +50,18 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      borderSide: BorderSide.none),
-                  prefixIcon: const Icon(Icons.search),
-                  fillColor: Colors.grey.shade200,
-                  filled: true,
-                  hintText: "Search",
-                ),
+              const HomeScreenSearchBar(),
+              const SizedBox(
+                height: 16,
               ),
+              const HomeCarouselSlider(),
+              const SizedBox(
+                height: 16,
+              ),
+              TitleHeaderAndSeeAllButton(
+                title: 'Categories',
+                onTap: () {},
+              )
             ],
           ),
         ),

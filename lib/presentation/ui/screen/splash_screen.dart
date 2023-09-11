@@ -38,6 +38,14 @@ class _SplashScreenState extends State<SplashScreen> {
           const SizedBox(
             height: 10,
           ),
+          const Text(
+            "Developed By Mostafejur Rahman",
+            style: TextStyle(
+                color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 13),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           const Text("Version 1.0.0"),
           const SizedBox(
             height: 10,
