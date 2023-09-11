@@ -18,7 +18,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
     return Column(
       children: [
         SizedBox(
-          height: 300,
+          height: 200,
           width: MediaQuery.of(context).size.width,
           child: PageView.builder(
               padEnds: false,

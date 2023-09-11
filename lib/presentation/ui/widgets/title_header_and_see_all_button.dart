@@ -19,7 +19,10 @@ class TitleHeaderAndSeeAllButton extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        TextButton(onPressed: onTap, child: const Text("See All"))
+        TextButton(
+          onPressed: onTap,
+          child: const Text("See All"),
+        ),
       ],
     );
   }

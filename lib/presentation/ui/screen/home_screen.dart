@@ -1,10 +1,13 @@
+import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
-import 'package:ecommerce/presentation/ui/widgets/home_carousel_slider.dart';
-import 'package:ecommerce/presentation/ui/widgets/home_screen_search_bar.dart';
+import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_carousel_slider.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_screen_search_bar.dart';
 import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,8 +62,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 16,
               ),
               TitleHeaderAndSeeAllButton(
-                title: 'Categories',
-                onTap: () {},
+                title: 'All Categories',
+                onTap: () {
+                  Get.to(
+                    const CategoriesScreen(),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                height: 90,
+                child: ListView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, int index) {
+                      return const CategoriesCard();
+                    }),
               )
             ],
           ),
