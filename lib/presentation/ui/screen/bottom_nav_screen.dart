@@ -33,6 +33,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         selectedItemColor: AppColor.primaryColor,
         showSelectedLabels: true,
         type: BottomNavigationBarType.shifting,
+        elevation: 4,
         onTap: (int index) {
           selectedIndex = index;
           if (mounted) {
