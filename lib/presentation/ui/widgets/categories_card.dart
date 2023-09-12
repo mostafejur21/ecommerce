@@ -11,7 +11,7 @@ class CategoriesCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: AppColor.primaryColor.withOpacity(0.1),
@@ -29,6 +29,7 @@ class CategoriesCard extends StatelessWidget {
           const Text(
             "Electronics",
             style: TextStyle(
+              overflow: TextOverflow.ellipsis,
                 fontSize: 15, color: AppColor.primaryColor, letterSpacing: 0.4),
           ),
         ],

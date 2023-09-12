@@ -2,6 +2,7 @@ import 'package:ecommerce/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/home_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'wish_list_screen.dart';
@@ -31,7 +32,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         unselectedItemColor: Colors.grey,
         selectedItemColor: AppColor.primaryColor,
         showSelectedLabels: true,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.shifting,
         onTap: (int index) {
           selectedIndex = index;
           if (mounted) {
@@ -40,13 +41,13 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: "Home"),
+              icon: Icon(CupertinoIcons.home), label: "Home", tooltip: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.category_rounded), label: "Category"),
+              icon: Icon(CupertinoIcons.square_grid_2x2), label: "Category"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.card_giftcard_outlined), label: "Cart"),
+              icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.wallet_giftcard_outlined), label: "Wish"),
+              icon: Icon(CupertinoIcons.gift), label: "Wish"),
         ],
       ),
     );

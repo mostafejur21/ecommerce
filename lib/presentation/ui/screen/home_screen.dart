@@ -1,9 +1,11 @@
 import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/popular_item_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
 import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_carousel_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_screen_search_bar.dart';
+import 'package:ecommerce/presentation/ui/widgets/products_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -75,12 +77,60 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 90,
                 child: ListView.builder(
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, int index) {
-                      return const CategoriesCard();
-                    }),
-              )
+                  itemCount: 10,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, int index) {
+                    return const CategoriesCard();
+                  },
+                ),
+              ),
+              TitleHeaderAndSeeAllButton(
+                title: "Popular",
+                onTap: () {
+                  Get.to(
+                    const PopularItemScreen(),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 182,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 12,
+                  itemBuilder: (context, index) {
+                    return const ProductsCard();
+                  },
+                ),
+              ),
+              TitleHeaderAndSeeAllButton(
+                title: "Spacial",
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 182,
+                child: ListView.builder(
+                  addAutomaticKeepAlives: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 12,
+                  itemBuilder: (context, index) {
+                    return const ProductsCard();
+                  },
+                ),
+              ),
+              TitleHeaderAndSeeAllButton(
+                title: "New",
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 182,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 12,
+                  itemBuilder: (context, index) {
+                    return const ProductsCard();
+                  },
+                ),
+              ),
             ],
           ),
         ),
