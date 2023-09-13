@@ -29,8 +29,10 @@ class CategoriesCard extends StatelessWidget {
           const Text(
             "Electronics",
             style: TextStyle(
-              overflow: TextOverflow.ellipsis,
-                fontSize: 15, color: AppColor.primaryColor, letterSpacing: 0.4),
+                overflow: TextOverflow.ellipsis,
+                fontSize: 15,
+                color: AppColor.primaryColor,
+                letterSpacing: 0.4),
           ),
         ],
       ),
