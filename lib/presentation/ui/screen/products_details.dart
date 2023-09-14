@@ -1,37 +1,27 @@
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
-import 'package:ecommerce/presentation/ui/widgets/cart_screen_list_tile_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+class ProductsDetailsScreen extends StatefulWidget {
+  const ProductsDetailsScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<ProductsDetailsScreen> createState() => _ProductsDetailsScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Cart", true),
+      appBar: customAppBar("Products Details", false),
       body: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, int index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: CartListTileCard(),
-                );
-              },
-            ),
-          ),
+          const HomeCarouselSlider(),
+          const Spacer(),
           Container(
             clipBehavior: Clip.hardEdge,
-            height: 100,
+            height: 88,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
@@ -41,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
               color: AppColor.primaryColor.withOpacity(0.2),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(28.0),
+              padding: const EdgeInsets.all(18.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -50,14 +40,14 @@ class _CartScreenState extends State<CartScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Total Price",
-                        style: TextStyle(fontSize: 12),
+                        "Price",
+                        style: TextStyle(fontSize: 16),
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
-                        "\$10,000.00",
+                        "\$100.00",
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColor.primaryColor,
@@ -70,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Text(
-                        "Check Out",
+                        "Add To Cart",
                         style: TextStyle(fontSize: 12),
                       ),
                     ),

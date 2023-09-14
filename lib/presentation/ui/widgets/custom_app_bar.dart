@@ -1,15 +1,15 @@
-import 'package:ecommerce/presentation/ui/screen/bottom_nav_screen.dart';
+import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-AppBar customAppBar(bool showBackButton, String title) {
+AppBar customAppBar(String title, bool navBar) {
   return AppBar(
     title: Text(title),
-    leading: showBackButton == true ? IconButton(
+    leading: IconButton(
       onPressed: () {
-        Get.to(const BottomNavBarScreen());
-      },
+         navBar == true ? Get.find<MainBottomNavController>().backToHomeScreen()
+          : Get.back();
+        },
       icon: const Icon(Icons.arrow_back_ios_new_rounded),
-    ) : null,
+    ),
   );
 }

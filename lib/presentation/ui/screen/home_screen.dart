@@ -1,5 +1,7 @@
-import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
+import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce/presentation/ui/screen/new_item_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/popular_item_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/spacial_item_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
 import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
@@ -66,9 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TitleHeaderAndSeeAllButton(
                 title: 'All Categories',
                 onTap: () {
-                  Get.to(
-                    const CategoriesScreen(),
-                  );
+                  Get.find<MainBottomNavController>().onChanged(1);
                 },
               ),
               const SizedBox(
@@ -87,9 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TitleHeaderAndSeeAllButton(
                 title: "Popular",
                 onTap: () {
-                  Get.to(
-                    const PopularItemScreen(),
-                  );
+                Get.to(const PopularItemScreen());
                 },
               ),
               SizedBox(
@@ -104,7 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               TitleHeaderAndSeeAllButton(
                 title: "Spacial",
-                onTap: () {},
+                onTap: () {
+                  Get.to(const SpacialItemScreen());
+                },
               ),
               SizedBox(
                 height: 182,
@@ -119,7 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               TitleHeaderAndSeeAllButton(
                 title: "New",
-                onTap: () {},
+                onTap: () {
+                  Get.to(const NewItemScreen());
+                },
               ),
               SizedBox(
                 height: 182,

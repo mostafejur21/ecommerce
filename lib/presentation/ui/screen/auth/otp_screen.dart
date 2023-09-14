@@ -27,7 +27,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     super.initState();
   }
 
-  int timeLeft = 120;
+  int timeLeft = 10;
   bool wait = false;
 
   void startTimer() {
@@ -37,7 +37,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       if (timeLeft == 0) {
         setState(() {
           timer.cancel();
-          wait = false;
+          wait = true;
         });
       } else {
         setState(() {
@@ -134,17 +134,28 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     const TextSpan(text: "This code will expire in "),
                     TextSpan(
                         text: "${timeLeft}s",
-                        style: const TextStyle(
-                            color: AppColor.primaryColor,
+                        style: TextStyle(
+                            color: timeLeft == 0
+                                ? Colors.grey
+                                : AppColor.primaryColor,
                             fontWeight: FontWeight.bold))
                   ],
                 ),
               ),
               TextButton(
-                onPressed: () {},
-                child: const Text(
+                onPressed: () {
+                  if (wait) {
+                    Get.snackbar(
+                        "Otp resend success", "we have send you another otp");
+                  } else {
+                    Get.snackbar("Wait", "please wait");
+                  }
+                },
+                child: Text(
                   "Resend",
-                  style: TextStyle(color: Colors.grey),
+                  style: wait == false
+                      ? const TextStyle(color: Colors.grey)
+                      : const TextStyle(color: AppColor.primaryColor),
                 ),
               ),
             ],
