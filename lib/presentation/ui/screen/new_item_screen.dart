@@ -13,7 +13,7 @@ class _NewItemScreenState extends State<NewItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("New", false),
+      appBar: customAppBar("New", true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: GridView.builder(

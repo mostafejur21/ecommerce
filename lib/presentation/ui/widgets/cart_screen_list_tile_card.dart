@@ -1,5 +1,6 @@
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
+import 'package:ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class CartListTileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
       child: ListTile(
         isThreeLine: true,
         leading: Image.asset(ImagesUtils.shoePng),
@@ -43,35 +45,12 @@ class CartListTileCard extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  color: AppColor.primaryColor.withOpacity(0.9),
-                  child: const Padding(
-                    padding: EdgeInsets.all(1.0),
-                    child: Icon(
-                      Icons.remove,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                const Text("1"),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  color: AppColor.primaryColor.withOpacity(0.9),
-                  child: const Padding(
-                    padding: EdgeInsets.all(1.0),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
+                CustomStepper(
+                    stepValue: 1,
+                    lowerLimit: 1,
+                    upperLimit: 20,
+                    value: 1,
+                    onChanged: (value) {}),
               ],
             ),
           ],

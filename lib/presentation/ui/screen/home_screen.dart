@@ -24,34 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          children: [
-            SvgPicture.asset(ImagesUtils.craftyBayNavBarLogoSVG),
-            const Spacer(),
-            AppBarIcons(
-              icon: Icons.person_outline,
-              onTap: () {},
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            AppBarIcons(
-              icon: Icons.phone_outlined,
-              onTap: () {},
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            AppBarIcons(
-              icon: Icons.notifications_active_outlined,
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      appBar: homeScreenAppBar,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -74,68 +47,115 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  itemCount: 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, int index) {
-                    return const CategoriesCard();
-                  },
-                ),
-              ),
+              allCategoriesCardListView,
               TitleHeaderAndSeeAllButton(
                 title: "Popular",
                 onTap: () {
                 Get.to(const PopularItemScreen());
                 },
               ),
-              SizedBox(
-                height: 182,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return const ProductsCard();
-                  },
-                ),
-              ),
+              popularItemsListView,
               TitleHeaderAndSeeAllButton(
                 title: "Spacial",
                 onTap: () {
                   Get.to(const SpacialItemScreen());
                 },
               ),
-              SizedBox(
-                height: 182,
-                child: ListView.builder(
-                  addAutomaticKeepAlives: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return const ProductsCard();
-                  },
-                ),
-              ),
+              spacialItemListView,
               TitleHeaderAndSeeAllButton(
                 title: "New",
                 onTap: () {
                   Get.to(const NewItemScreen());
                 },
               ),
-              SizedBox(
-                height: 182,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return const ProductsCard();
-                  },
-                ),
-              ),
+              newItemListView,
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox get newItemListView {
+    return SizedBox(
+              height: 182,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 12,
+                itemBuilder: (context, index) {
+                  return const ProductsCard();
+                },
+              ),
+            );
+  }
+
+  SizedBox get spacialItemListView {
+    return SizedBox(
+              height: 182,
+              child: ListView.builder(
+                addAutomaticKeepAlives: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: 12,
+                itemBuilder: (context, index) {
+                  return const ProductsCard();
+                },
+              ),
+            );
+  }
+
+  SizedBox get popularItemsListView {
+    return SizedBox(
+              height: 182,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 12,
+                itemBuilder: (context, index) {
+                  return const ProductsCard();
+                },
+              ),
+            );
+  }
+
+  SizedBox get allCategoriesCardListView {
+    return SizedBox(
+              height: 90,
+              child: ListView.builder(
+                itemCount: 10,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, int index) {
+                  return const CategoriesCard();
+                },
+              ),
+            );
+  }
+
+  AppBar get homeScreenAppBar {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Row(
+        children: [
+          SvgPicture.asset(ImagesUtils.craftyBayNavBarLogoSVG),
+          const Spacer(),
+          AppBarIcons(
+            icon: Icons.person_outline,
+            onTap: () {},
+          ),
+          const SizedBox(
+            width: 12,
+          ),
+          AppBarIcons(
+            icon: Icons.phone_outlined,
+            onTap: () {},
+          ),
+          const SizedBox(
+            width: 12,
+          ),
+          AppBarIcons(
+            icon: Icons.notifications_active_outlined,
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }

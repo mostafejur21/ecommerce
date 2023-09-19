@@ -15,28 +15,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         Get.find<MainBottomNavController>().backToHomeScreen();
         return false;
       },
       child: Scaffold(
-        appBar: customAppBar("Categories", true),
+        appBar: customAppBar("Categories", false),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-            ),
-            itemBuilder: (context, int index) {
-              return const FittedBox(
-                child: CategoriesCard(),
-              );
-            },
-          ),
+          child: gridViewForCategories,
         ),
       ),
+    );
+  }
+
+  GridView get gridViewForCategories {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+      ),
+      itemBuilder: (context, int index) {
+        return const FittedBox(
+          child: CategoriesCard(),
+        );
+      },
     );
   }
 }

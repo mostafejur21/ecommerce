@@ -13,7 +13,7 @@ class _PopularItemScreenState extends State<PopularItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Popular", false),
+      appBar: customAppBar("Popular", true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: GridView.builder(

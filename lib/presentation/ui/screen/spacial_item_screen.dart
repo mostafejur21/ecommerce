@@ -13,7 +13,7 @@ class _SpacialItemScreenState extends State<SpacialItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Spacial", false),
+      appBar: customAppBar("Spacial", true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: GridView.builder(

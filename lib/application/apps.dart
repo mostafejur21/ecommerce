@@ -11,7 +11,6 @@ class CraftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-
       useInheritedMediaQuery: true,
       //for devices preview
       locale: DevicePreview.locale(context),
@@ -28,7 +27,14 @@ class CraftyBay extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          disabledBorder: const OutlineInputBorder(),
+          disabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: AppColor.primaryColor),
+              borderRadius: BorderRadius.circular(8)),
+          focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.primaryColor)),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.primaryColor),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
