@@ -1,6 +1,10 @@
-import 'package:ecommerce/presentation/ui/utils/app_color.dart';
+import 'package:ecommerce/presentation/ui/widgets/bottom_price_details_and_button.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
-import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_carousel_slider.dart';
+import 'package:ecommerce/presentation/ui/widgets/custom_stepper.dart';
+import 'package:ecommerce/presentation/ui/widgets/favorite_loveIcon_button.dart';
+import 'package:ecommerce/presentation/ui/widgets/products_carousel_slider.dart';
+import 'package:ecommerce/presentation/ui/widgets/products_details_color_selector.dart';
+import 'package:ecommerce/presentation/ui/widgets/products_details_size_selector.dart';
 import 'package:flutter/material.dart';
 
 class ProductsDetailsScreen extends StatefulWidget {
@@ -17,57 +21,94 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
       appBar: customAppBar("Products Details", false),
       body: Column(
         children: [
-          const HomeCarouselSlider(),
-          const Spacer(),
-          Container(
-            clipBehavior: Clip.hardEdge,
-            height: 88,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(24),
-                topLeft: Radius.circular(24),
-              ),
-              color: AppColor.primaryColor.withOpacity(0.2),
-            ),
+          const ProductsDetailsCarouselSlider(),
+          Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Price",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "\$100.00",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: AppColor.primaryColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 120,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Add To Cart",
-                        style: TextStyle(fontSize: 12),
-                      ),
+              padding: const EdgeInsets.all(12),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomStepper(),
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          size: 18,
+                          color: Colors.amber,
+                        ),
+                        const Text(
+                          "4.5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Review",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        const FavoriteLoveIconButton(),
+                      ],
                     ),
-                  )
-                ],
+                    const Text(
+                      "Color",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const ProductsDetailsColorSelector(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      "Sizes",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const ProductsDetailsSizeSelector(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1),
+                    ),
+                    const Text(
+                      '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.''',
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
               ),
             ),
+          ),
+          BottomPriceDetailsAndButton(
+            priceText: 'Price',
+            actualPrice: '\$100.00',
+            buttonText: 'Add To Cart',
+            whatWillHappenWhenPressTheButton: () {},
           ),
         ],
       ),
