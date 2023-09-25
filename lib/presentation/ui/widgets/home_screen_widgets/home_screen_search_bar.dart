@@ -14,6 +14,11 @@ class HomeScreenSearchBar extends StatelessWidget {
               Radius.circular(8),
             ),
             borderSide: BorderSide.none),
+        disabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),),
         prefixIcon: const Icon(Icons.search),
         fillColor: Colors.grey.shade200,
         filled: true,

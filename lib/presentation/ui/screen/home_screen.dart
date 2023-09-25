@@ -1,4 +1,5 @@
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/new_item_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/popular_item_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/spacial_item_screen.dart';
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TitleHeaderAndSeeAllButton(
                 title: "Popular",
                 onTap: () {
-                Get.to(const PopularItemScreen());
+                  Get.to(const PopularItemScreen());
                 },
               ),
               popularItemsListView,
@@ -78,55 +79,55 @@ class _HomeScreenState extends State<HomeScreen> {
 
   SizedBox get newItemListView {
     return SizedBox(
-              height: 182,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return const ProductsCard();
-                },
-              ),
-            );
+      height: 182,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 12,
+        itemBuilder: (context, index) {
+          return const ProductsCard();
+        },
+      ),
+    );
   }
 
   SizedBox get spacialItemListView {
     return SizedBox(
-              height: 182,
-              child: ListView.builder(
-                addAutomaticKeepAlives: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return const ProductsCard();
-                },
-              ),
-            );
+      height: 182,
+      child: ListView.builder(
+        addAutomaticKeepAlives: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 12,
+        itemBuilder: (context, index) {
+          return const ProductsCard();
+        },
+      ),
+    );
   }
 
   SizedBox get popularItemsListView {
     return SizedBox(
-              height: 182,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return const ProductsCard();
-                },
-              ),
-            );
+      height: 182,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 12,
+        itemBuilder: (context, index) {
+          return const ProductsCard();
+        },
+      ),
+    );
   }
 
   SizedBox get allCategoriesCardListView {
     return SizedBox(
-              height: 90,
-              child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, int index) {
-                  return const CategoriesCard();
-                },
-              ),
-            );
+      height: 90,
+      child: ListView.builder(
+        itemCount: 10,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, int index) {
+          return const CategoriesCard();
+        },
+      ),
+    );
   }
 
   AppBar get homeScreenAppBar {
@@ -139,7 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
           const Spacer(),
           AppBarIcons(
             icon: Icons.person_outline,
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const EmailVerificationScreen());
+            },
           ),
           const SizedBox(
             width: 12,

@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/otp_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
@@ -75,19 +76,38 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Get.to(const OtpVerificationScreen());
-                    }
-                  },
-                  child: const Text("NEXT"),
-                ),
+                child: GetBuilder<EmailVerificationController>(
+                    builder: (emailController) {
+                  if (emailController.emailVerificationInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        verifyEmail(emailController);
+                      }
+                    },
+                    child: const Text("NEXT"),
+                  );
+                }),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> verifyEmail(EmailVerificationController controller) async {
+    final response =
+        await controller.verifyEmail(_emailTEController.text.trim());
+    if (response) {
+      Get.to(() => const OtpVerificationScreen());
+    } else {
+      Get.snackbar(
+          "error", "Email verification has been failed! please try again");
+    }
   }
 }
