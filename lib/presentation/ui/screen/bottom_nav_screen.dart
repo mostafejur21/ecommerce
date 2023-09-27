@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
@@ -23,6 +24,13 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     const CartScreen(),
     const WishListScreen(),
   ];
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<HomeScreenSliderController>().getHomeScreenSlider();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

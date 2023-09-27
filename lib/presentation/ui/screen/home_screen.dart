@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/new_item_screen.dart';
@@ -35,7 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const HomeCarouselSlider(),
+              GetBuilder<HomeScreenSliderController>(builder: (controller) {
+                if (controller.homeScreenSliderInProgress) {
+                  return const SizedBox(
+                    height: 200,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return HomeCarouselSlider(sliders: controller.homeScreenSliderModel.data ?? [],);
+              }),
               const SizedBox(
                 height: 16,
               ),

@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
+import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
+import 'package:ecommerce/presentation/ui/screen/bottom_nav_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_otp_field.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  final String email;
+  const OtpVerificationScreen({super.key, required this.email});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -99,29 +101,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               ),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_otpController1.text.isEmpty &&
-                        _otpController2.text.isEmpty &&
-                        _otpController3.text.isEmpty &&
-                        _otpController4.text.isEmpty) {
-                      Get.showSnackbar(
-                        const GetSnackBar(
-                          title: "Error",
-                          message: "Enter the correct otp",
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
-                    } else {
-                      Get.to(const CompleteProfileScreen());
+                child: GetBuilder<OTPVerifyLoginController>(
+                  builder: (controller) {
+                    if(controller.verifyLoginInProgress){
+                      return const Center(child: CircularProgressIndicator(),);
                     }
-                    _otpController1.clear();
-                    _otpController2.clear();
-                    _otpController3.clear();
-                    _otpController4.clear();
-                    // Get.offAll(const CompleteProfileScreen());
-                  },
-                  child: const Text("Next"),
+                    return ElevatedButton(
+                      onPressed: () async {
+                        verifyOtp(controller);
+                        // if (_otpController1.text.isEmpty &&
+                        //     _otpController2.text.isEmpty &&
+                        //     _otpController3.text.isEmpty &&
+                        //     _otpController4.text.isEmpty) {
+                        //
+                        // } else {
+                        //   Get.to(const CompleteProfileScreen());
+                        // }
+                        _otpController1.clear();
+                        _otpController2.clear();
+                        _otpController3.clear();
+                        _otpController4.clear();
+                        // Get.offAll(const CompleteProfileScreen());
+                      },
+                      child: const Text("Next"),
+                    );
+                  }
                 ),
               ),
               const SizedBox(
@@ -145,6 +149,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               TextButton(
                 onPressed: () {
                   if (wait) {
+
                     Get.snackbar(
                         "Otp resend success", "we have send you another otp");
                   } else {
@@ -163,5 +168,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ),
       ),
     );
+  }
+
+
+  Future<void> verifyOtp(OTPVerifyLoginController controller)async{
+    final String otp = "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
+    final response = await controller.verifyLogin(widget.email, otp.removeAllWhitespace);
+    if(response){
+      Get.to(()=> const BottomNavBarScreen());
+    }else{
+      Get.showSnackbar(
+        const GetSnackBar(
+          title: "Error",
+          message: "Enter the correct otp",
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 }

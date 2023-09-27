@@ -19,7 +19,7 @@ class EmailVerificationController extends GetxController {
     _emailVerificationInProgress = false;
     update();
     if (response.isSuccess && response.statusCode == 200) {
-      _message = response.response?['data'] ?? "";
+      _message = response.responseJson?['data'] ?? "";
       return true;
     } else {
       return false;
