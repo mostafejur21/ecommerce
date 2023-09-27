@@ -7,8 +7,8 @@ import 'package:ecommerce/presentation/ui/screen/spacial_item_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
 import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
-import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_carousel_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_screen_search_bar.dart';
+import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
-                return HomeCarouselSlider(sliders: controller.homeScreenSliderModel.data ?? [],);
+                return HomeSlider(sliders: controller.homeScreenSliderModel.data ?? [],);
               }),
               const SizedBox(
                 height: 16,

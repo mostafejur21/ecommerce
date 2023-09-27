@@ -39,10 +39,13 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                 ),
                 child: Stack(
                   children: [
-                    Image.network(data.image ?? ""),
+                    Image.network(data.image ?? "error", scale: 1.0,fit: BoxFit.scaleDown,),
                     Positioned(
                       bottom: 0,
-                      child: Text(data.title ?? ""),
+                      child: Text(
+                        data.title ?? "",
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
