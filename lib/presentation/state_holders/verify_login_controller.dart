@@ -13,7 +13,7 @@ class OTPVerifyLoginController extends GetxController {
     _verifyLoginInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller().getRequest(
-      Urls.verifyLogin(email, otp),
+      Urls.verifyOtp(email, otp),
     );
     _verifyLoginInProgress = false;
     update();
