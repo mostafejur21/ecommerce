@@ -1,18 +1,21 @@
+import 'package:ecommerce/data/models/products.dart';
 import 'package:ecommerce/presentation/ui/screen/products_details.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
-import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductsCard extends StatelessWidget {
   const ProductsCard({
     super.key,
+    required this.product,
   });
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Get.to(const ProductsDetailsScreen());
       },
       child: Card(
@@ -28,21 +31,23 @@ class ProductsCard extends StatelessWidget {
               Container(
                 height: 120,
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8)),
-                    color: AppColor.primaryColor.withOpacity(0.2),
-                    image: const DecorationImage(
-                        image: AssetImage(ImagesUtils.shoePng),),),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8)),
+                  color: AppColor.primaryColor.withOpacity(0.2),
+                  image: DecorationImage(
+                    image: NetworkImage(product.image ?? ''),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    const Text(
-                      "New Year Spacial Shoe 30",
+                    Text(
+                      product.title ?? "",
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -51,9 +56,9 @@ class ProductsCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "\$100",
-                          style: TextStyle(
+                        Text(
+                          "\$${product.price ?? 0}",
+                          style: const TextStyle(
                               color: AppColor.primaryColor,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -67,7 +72,7 @@ class ProductsCard extends StatelessWidget {
                               color: Colors.amber,
                             ),
                             Text(
-                              "4.5",
+                              "${product.star ?? 0}",
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 13,

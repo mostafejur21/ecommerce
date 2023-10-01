@@ -25,7 +25,7 @@ class _NewItemScreenState extends State<NewItemScreen> {
           ),
           itemBuilder: (context, int index) {
             return const FittedBox(
-              child: ProductsCard(),
+              child: ProductsCard(product: null,),
             );
           },
         ),
