@@ -10,4 +10,5 @@ class Urls{
   static String cartList = "$_baseURL/CartList";
   static String createCartList = "$_baseURL/CreateCartList";
   static String homeScreenSlider = "$_baseURL/ListProductSlider";
+  static String getCategories = '$_baseURL/CategoryList';
 }

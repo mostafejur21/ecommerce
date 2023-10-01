@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/categories_controller.dart';
 import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/cart_screen.dart';
@@ -28,6 +29,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeScreenSliderController>().getHomeScreenSlider();
+      Get.find<CategoriesController>().getCategories();
     });
     super.initState();
   }

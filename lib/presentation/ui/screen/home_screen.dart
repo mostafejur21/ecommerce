@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/categories_controller.dart';
 import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
@@ -45,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
-                return HomeSlider(sliders: controller.homeScreenSliderModel.data ?? [],);
+                return HomeSlider(
+                  sliders: controller.homeScreenSliderModel.data ?? [],
+                );
               }),
               const SizedBox(
                 height: 16,
@@ -131,13 +134,17 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get allCategoriesCardListView {
     return SizedBox(
       height: 90,
-      child: ListView.builder(
-        itemCount: 10,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, int index) {
-          return const CategoriesCard();
-        },
-      ),
+      child: GetBuilder<CategoriesController>(builder: (categoriesController) {
+        return ListView.builder(
+          itemCount: categoriesController.categoryModel.data?.length ?? 0,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, int index) {
+            return CategoriesCard(
+              categoryData: categoriesController.categoryModel.data![index],
+            );
+          },
+        );
+      }),
     );
   }
 
