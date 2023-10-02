@@ -1,7 +1,9 @@
 import 'package:ecommerce/presentation/state_holders/categories_controller.dart';
 import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce/presentation/state_holders/new_products_controller.dart';
 import 'package:ecommerce/presentation/state_holders/popular_products_controller.dart';
+import 'package:ecommerce/presentation/state_holders/spacial_products_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/categories_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/home_screen.dart';
@@ -32,6 +34,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
       Get.find<HomeScreenSliderController>().getHomeScreenSlider();
       Get.find<CategoriesController>().getCategories();
       Get.find<PopularProductsController>().getPopularProducts();
+      Get.find<NewProductsController>().getNewProducts();
+      Get.find<SpecialProductsController>().getSpecialProducts();
     });
     super.initState();
   }

@@ -15,7 +15,7 @@ class NewProductsController extends GetxController {
 
   String get message => _message;
 
-  Future<bool> getPopularProducts() async {
+  Future<bool> getNewProducts() async {
     _getNewProductsInProgress = true;
     update();
     final NetworkResponse response =

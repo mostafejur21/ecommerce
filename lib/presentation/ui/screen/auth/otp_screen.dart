@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
-import 'package:ecommerce/presentation/ui/screen/bottom_nav_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_otp_field.dart';

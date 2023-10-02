@@ -1,7 +1,9 @@
 import 'package:ecommerce/presentation/state_holders/categories_controller.dart';
 import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce/presentation/state_holders/new_products_controller.dart';
 import 'package:ecommerce/presentation/state_holders/popular_products_controller.dart';
+import 'package:ecommerce/presentation/state_holders/spacial_products_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/new_item_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/popular_item_screen.dart';
@@ -77,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.to(const SpacialItemScreen());
                 },
               ),
-              spacialItemListView,
+              specialItemListView,
               TitleHeaderAndSeeAllButton(
                 title: "New",
                 onTap: () {
@@ -95,27 +97,47 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get newItemListView {
     return SizedBox(
       height: 182,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 12,
-        itemBuilder: (context, index) {
-          return const ProductsCard();
-        },
-      ),
+      child: GetBuilder<NewProductsController>(builder: (newController) {
+        if (newController.getNewInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return ListView.builder(
+          addAutomaticKeepAlives: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: newController.productModel.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            return ProductsCard(
+              product: newController.productModel.data![index],
+            );
+          },
+        );
+      }),
     );
   }
 
-  SizedBox get spacialItemListView {
+  SizedBox get specialItemListView {
     return SizedBox(
       height: 182,
-      child: ListView.builder(
-        addAutomaticKeepAlives: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 12,
-        itemBuilder: (context, index) {
-          return const ProductsCard(product: ,);
-        },
-      ),
+      child:
+          GetBuilder<SpecialProductsController>(builder: (specialController) {
+        if (specialController.getSpecialProductsInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return ListView.builder(
+          addAutomaticKeepAlives: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: specialController.productModel.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            return ProductsCard(
+              product: specialController.productModel.data![index],
+            );
+          },
+        );
+      }),
     );
   }
 
@@ -123,19 +145,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return SizedBox(
       height: 182,
       child: GetBuilder<PopularProductsController>(
-        builder: (popularProductsController) {
-          if(popularProductsController.getPopularProductsInProgress){
-            return const Center(child: CircularProgressIndicator(),);
-          }
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: popularProductsController.productModel.data?.length,
-            itemBuilder: (context, index) {
-              return ProductsCard(product: popularProductsController.productModel.data![index],);
-            },
+          builder: (popularProductsController) {
+        if (popularProductsController.getPopularProductsInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
-      ),
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: popularProductsController.productModel.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            return ProductsCard(
+              product: popularProductsController.productModel.data![index],
+            );
+          },
+        );
+      }),
     );
   }
 

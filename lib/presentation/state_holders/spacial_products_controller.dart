@@ -9,13 +9,13 @@ class SpecialProductsController extends GetxController {
   String _message = "";
   ProductModel _productModel = ProductModel();
 
-  bool get getPopularProductsInProgress => _getSpacialProductsInProgress;
+  bool get getSpecialProductsInProgress => _getSpacialProductsInProgress;
 
   ProductModel get productModel => _productModel;
 
   String get message => _message;
 
-  Future<bool> getPopularProducts() async {
+  Future<bool> getSpecialProducts() async {
     _getSpacialProductsInProgress = true;
     update();
     final NetworkResponse response =
