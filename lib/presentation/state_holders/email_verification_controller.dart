@@ -1,6 +1,6 @@
 import 'package:ecommerce/data/models/network_response.dart';
 import 'package:ecommerce/data/services/network_caller.dart';
-import 'package:ecommerce/data/utils/api_links.dart';
+import 'package:ecommerce/data/utils/url_links.dart';
 import 'package:get/get.dart';
 
 class EmailVerificationController extends GetxController {

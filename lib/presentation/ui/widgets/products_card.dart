@@ -1,5 +1,5 @@
 import 'package:ecommerce/data/models/products.dart';
-import 'package:ecommerce/presentation/ui/screen/products_details.dart';
+import 'package:ecommerce/presentation/ui/screen/products_details_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,7 @@ class ProductsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(const ProductsDetailsScreen());
+        Get.to(() => ProductsDetailsScreen(productsId: product.id!));
       },
       child: Card(
         elevation: 5,

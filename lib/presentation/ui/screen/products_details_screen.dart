@@ -1,3 +1,5 @@
+import 'package:ecommerce/data/models/products_details.dart';
+import 'package:ecommerce/presentation/state_holders/products_details_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/review_showing_screen.dart';
 import 'package:ecommerce/presentation/ui/widgets/bottom_price_details_and_button.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
@@ -10,49 +12,75 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductsDetailsScreen extends StatefulWidget {
-  const ProductsDetailsScreen({super.key});
+  final int productsId;
+  const ProductsDetailsScreen({super.key, required this.productsId});
 
   @override
   State<ProductsDetailsScreen> createState() => _ProductsDetailsScreenState();
 }
 
 class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductsDetailsController>().getProductsDetails(widget.productsId);
+    });
+  }
+
+  // ignore: unused_field
+  int _selectedSizeIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("Products Details", true),
-      body: Column(
-        children: [
-          const ProductsDetailsCarouselSlider(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: SingleChildScrollView(
-                child: productsDetails,
+      body: GetBuilder<ProductsDetailsController>(
+        builder: (productsDetailsController) {
+          return Column(
+            children: [
+              ProductsDetailsCarouselSlider(
+                imageList: [
+                  productsDetailsController.productsDetails.img1 ?? "",
+                  productsDetailsController.productsDetails.img2 ?? "",
+                  productsDetailsController.productsDetails.img3 ?? "",
+                  productsDetailsController.productsDetails.img4 ?? "",
+                ],
               ),
-            ),
-          ),
-          BottomPriceDetailsAndButton(
-            priceText: 'Price',
-            actualPrice: '\$100.00',
-            buttonText: 'Add To Cart',
-            whatWillHappenWhenPressTheButton: () {},
-          ),
-        ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SingleChildScrollView(
+                  child: productsDetails(
+                      productsDetailsController.productsDetails,
+                      productsDetailsController.availableColor),
+                ),
+                ),
+              ),
+              BottomPriceDetailsAndButton(
+                priceText: 'Price',
+                actualPrice: '\$100.00',
+                buttonText: 'Add To Cart',
+                whatWillHappenWhenPressTheButton: () {},
+              ),
+            ],
+          );
+        }
       ),
     );
   }
 
-  Column get productsDetails {
+  Column productsDetails (ProductsDetails productsDetails, List<String> colors ) {
     return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          "Adidas Shoe HK23454 - Black Edition",
-                          style: TextStyle(
+                          productsDetails.product?.title ?? "",
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.7,
@@ -76,9 +104,9 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                         size: 18,
                         color: Colors.amber,
                       ),
-                      const Text(
-                        "4.5",
-                        style: TextStyle(
+                      Text(
+                        '${productsDetails.product?.star ?? ""}',
+                        style: const TextStyle(
                           fontSize: 15,
                           overflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.w500,
@@ -110,7 +138,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  const ProductsDetailsColorSelector(),
+                  ProductsDetailsColorSelector(colorCodes: productsDetails.color?.split(',') ?? [],),
                   const SizedBox(
                     height: 16,
                   ),
@@ -124,8 +152,14 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  const ProductsDetailsSizeSelector(),
-                  const SizedBox(
+        ProductsDetailsSizeSelector(
+          sizes: productsDetails.size?.split(',') ?? [],
+          onSelect: (int index) {
+            _selectedSizeIndex = index;
+          },
+          initialSelected: 0,
+        ),
+        const SizedBox(
                     height: 16,
                   ),
                   const Text(
@@ -135,8 +169,8 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1),
                   ),
-                  const Text(
-                    '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.''',
+                  Text(
+                    productsDetails.des ?? "",
                     textAlign: TextAlign.justify,
                   ),
                 ],

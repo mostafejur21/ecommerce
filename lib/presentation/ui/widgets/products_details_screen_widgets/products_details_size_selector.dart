@@ -2,7 +2,10 @@ import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductsDetailsSizeSelector extends StatefulWidget {
-  const ProductsDetailsSizeSelector({super.key});
+  final List<String> sizes;
+  final Function(int index) onSelect;
+  final int initialSelected;
+  const ProductsDetailsSizeSelector({super.key, required this.sizes, required this.onSelect, required this.initialSelected});
 
   @override
   State<ProductsDetailsSizeSelector> createState() =>
@@ -11,14 +14,6 @@ class ProductsDetailsSizeSelector extends StatefulWidget {
 
 class _ProductsDetailsSizeSelectorState
     extends State<ProductsDetailsSizeSelector> {
-  final List<String> sizes = [
-    'XS',
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-  ];
   int sizesSelectedIndex = 0;
 
   @override
@@ -27,12 +22,13 @@ class _ProductsDetailsSizeSelectorState
       height: 30,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: sizes.length,
+        itemCount: widget.sizes.length,
         itemBuilder: (context, int index) {
           return InkWell(
             borderRadius: BorderRadius.circular(4),
             onTap: () {
               sizesSelectedIndex = index;
+              widget.onSelect(index);
               if (mounted) {
                 setState(() {});
               }
@@ -46,7 +42,7 @@ class _ProductsDetailsSizeSelectorState
                     sizesSelectedIndex == index ? AppColor.primaryColor : null,
               ),
               alignment: Alignment.center,
-              child: Text(sizes[index]),
+              child: Text(widget.sizes[index]),
             ),
           );
         },

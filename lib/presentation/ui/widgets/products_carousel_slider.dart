@@ -1,8 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductsDetailsCarouselSlider extends StatefulWidget {
-  const ProductsDetailsCarouselSlider({super.key});
+  final List<String> imageList;
+
+  const ProductsDetailsCarouselSlider({super.key, required this.imageList});
 
   @override
   State<ProductsDetailsCarouselSlider> createState() =>
@@ -21,29 +24,33 @@ class _ProductsDetailsCarouselSliderState
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SizedBox(
-          height: 250,
-          width: MediaQuery.of(context).size.width,
-          child: PageView.builder(
-            padEnds: false,
-            controller: PageController(initialPage: 1, viewportFraction: 2),
-            onPageChanged: (value) {
-              _selectedSlider.value = value;
-            },
-            itemCount: color.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: color[index],
-                ),
-                child: Center(
-                  child: Text("Images ${index + 1}"),
-                ),
-              );
-            },
-          ),
+        CarouselSlider(
+          options: CarouselOptions(
+              height: 240,
+              viewportFraction: 1,
+              autoPlay: false,
+              autoPlayInterval: const Duration(seconds: 3),
+              onPageChanged: (int page, _) {
+                _selectedSlider.value = page;
+              }),
+          items: widget.imageList.map((sliderData) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(sliderData),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                );
+              },
+            );
+          }).toList(),
         ),
         Positioned(
           bottom: 18,
@@ -53,7 +60,7 @@ class _ProductsDetailsCarouselSliderState
             valueListenable: _selectedSlider,
             builder: (context, value, _) {
               List<Widget> list = [];
-              for (int i = 0; i < color.length; i++) {
+              for (int i = 0; i < widget.imageList.length; i++) {
                 list.add(
                   Container(
                     width: 12,

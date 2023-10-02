@@ -18,4 +18,7 @@ class Urls {
 
   static String getProductsByRemarks(String remarks) =>
       '$_baseURL/ListProductByRemark/$remarks';
+
+  static String getProductsDetails(int productsId) =>
+      '$_baseURL/ProductDetailsById/$productsId';
 }
