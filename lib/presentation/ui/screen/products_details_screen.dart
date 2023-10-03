@@ -60,7 +60,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
               ),
               BottomPriceDetailsAndButton(
                 priceText: 'Price',
-                actualPrice: '\$100.00',
+                actualPrice: '\$${productsDetailsController.product.price ?? ""}',
                 buttonText: 'Add To Cart',
                 whatWillHappenWhenPressTheButton: () {},
               ),

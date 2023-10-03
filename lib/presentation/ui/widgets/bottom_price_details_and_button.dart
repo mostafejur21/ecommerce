@@ -53,9 +53,12 @@ class BottomPriceDetailsAndButton extends StatelessWidget {
               width: 120,
               child: ElevatedButton(
                 onPressed: whatWillHappenWhenPressTheButton,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                ),
                 child: Text(
                   buttonText,
-                  style: const TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 13),
                 ),
               ),
             )

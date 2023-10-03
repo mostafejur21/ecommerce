@@ -5,9 +5,7 @@ import 'package:ecommerce/presentation/state_holders/new_products_controller.dar
 import 'package:ecommerce/presentation/state_holders/popular_products_controller.dart';
 import 'package:ecommerce/presentation/state_holders/spacial_products_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
-import 'package:ecommerce/presentation/ui/screen/new_item_screen.dart';
-import 'package:ecommerce/presentation/ui/screen/popular_item_screen.dart';
-import 'package:ecommerce/presentation/ui/screen/spacial_item_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/item_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/app_bar_icons.dart';
 import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
@@ -66,25 +64,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 8,
               ),
               allCategoriesCardListView,
-              TitleHeaderAndSeeAllButton(
-                title: "Popular",
-                onTap: () {
-                  Get.to(const PopularItemScreen());
-                },
+              GetBuilder<PopularProductsController>(
+                builder: (controller) {
+                  return TitleHeaderAndSeeAllButton(
+                    title: "Popular",
+                    onTap: () {
+                    Get.to(
+                      ItemsScreen(
+                          title: 'Popular',
+                          products: controller.productModel,
+                      ),
+                    );
+                  },
+                );
+                }
               ),
               popularItemsListView,
-              TitleHeaderAndSeeAllButton(
-                title: "Spacial",
-                onTap: () {
-                  Get.to(const SpacialItemScreen());
-                },
+              GetBuilder<SpecialProductsController>(
+                  builder: (specialController) {
+                    return TitleHeaderAndSeeAllButton(
+                      title: "Special",
+                      onTap: () {
+                        Get.to(
+                          ItemsScreen(
+                            title: 'Special',
+                            products: specialController.productModel,
+                          ),
+                        );
+                      },
+                    );
+                  }
               ),
               specialItemListView,
-              TitleHeaderAndSeeAllButton(
-                title: "New",
-                onTap: () {
-                  Get.to(const NewItemScreen());
-                },
+              GetBuilder<NewProductsController>(
+                  builder: (newController) {
+                    return TitleHeaderAndSeeAllButton(
+                      title: "New",
+                      onTap: () {
+                        Get.to(
+                          ItemsScreen(
+                            title: 'New',
+                            products: newController.productModel,
+                          ),
+                        );
+                      },
+                    );
+                  }
               ),
               newItemListView,
             ],
@@ -121,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SizedBox(
       height: 182,
       child:
-          GetBuilder<SpecialProductsController>(builder: (specialController) {
+      GetBuilder<SpecialProductsController>(builder: (specialController) {
         if (specialController.getSpecialProductsInProgress) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -137,7 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         );
-      }),
+        },
+      ),
     );
   }
 

@@ -1,6 +1,8 @@
 import 'package:ecommerce/data/models/network_response.dart';
+import 'package:ecommerce/data/models/products.dart';
 import 'package:ecommerce/data/models/products_details.dart';
 import 'package:ecommerce/data/models/products_details_model.dart';
+import 'package:ecommerce/data/models/products_model.dart';
 import 'package:ecommerce/data/services/network_caller.dart';
 import 'package:ecommerce/data/utils/url_links.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:get/get.dart';
 class ProductsDetailsController extends GetxController {
   bool _getProductsDetailsInProgress = false;
   ProductsDetails _productsDetails = ProductsDetails();
+  Product _product = Product();
   final List<String> _availableColor = [];
   String _errorMessage = '';
 
@@ -17,6 +20,7 @@ class ProductsDetailsController extends GetxController {
 
   List<String> get availableColor => _availableColor;
 
+  Product get product => _product;
   String get errorMessage => _errorMessage;
 
   Future<bool> getProductsDetails(int productsId) async {
@@ -30,6 +34,7 @@ class ProductsDetailsController extends GetxController {
           ProductsDetailsModel.fromJson(response.responseJson ?? {})
               .data!
               .first;
+      _product = ProductModel.fromJson(response.responseJson ?? {}).data!.first;
       _convertedStringToColor(_productsDetails.color ?? "");
       update();
       return true;
