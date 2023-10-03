@@ -9,6 +9,7 @@ class Urls {
 
   static String verifyOtp(String email, String otp) =>
       '$_baseURL/VerifyLogin/$email/$otp';
+  static String completeProfile = "$_baseURL/CreateProfile";
   static String createProfile = "$_baseURL/CreateProfile";
   static String readProfile = "$_baseURL/ReadProfile";
   static String cartList = "$_baseURL/CartList";

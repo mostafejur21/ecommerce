@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/state_holders/complete_profile_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -77,12 +78,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   TextFormField(
                     validator: (value) {
                       if (value!.isEmpty ||
-                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                      {
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
                         return "please Enter your last name";
                       } else {
                         return null;
-                      }},
+                      }
+                    },
                     controller: _lastNameTEController,
                     decoration: const InputDecoration(labelText: "Last Name"),
                   ),
@@ -97,7 +98,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         return "please Enter your correct phone Number";
                       } else {
                         return null;
-                      }},
+                      }
+                    },
                     controller: _mobileTEController,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(labelText: "Mobile"),
@@ -123,19 +125,33 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        /*_firstNameTEController.clear();
-                        _lastNameTEController.clear();
-                        _cityTEController.clear();
-                        _mobileTEController.clear();
-                        _shippingAddressTEController.clear();*/
-                        if(_formKey.currentState!.validate()){
-                          Get.to(const HomeScreen());
-                        }
-                      },
-                      child: const Text("Complete"),
-                    ),
+                    child: GetBuilder<CompleteProfileController>(
+                        builder: (controller) {
+                      if (controller.completeProfileInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () {
+                          /*_firstNameTEController.clear();
+                            _lastNameTEController.clear();
+                            _cityTEController.clear();
+                            _mobileTEController.clear();
+                            _shippingAddressTEController.clear();*/
+                          controller.getCompleteProfile(
+                              _firstNameTEController.text.trim(),
+                              _lastNameTEController.text.trim(),
+                              _mobileTEController.text.trim(),
+                              _cityTEController.text,
+                              _shippingAddressTEController.text.trim());
+                          if (_formKey.currentState!.validate()) {
+                            Get.to(const HomeScreen());
+                          }
+                        },
+                        child: const Text("Complete"),
+                      );
+                    }),
                   )
                 ],
               ),
