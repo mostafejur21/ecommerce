@@ -18,7 +18,7 @@ class HomeScreenSliderController extends GetxController{
   Future<bool> getHomeScreenSlider () async {
     _homeScreenSliderInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller().getRequest(Urls.homeScreenSlider);
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.homeScreenSlider);
     _homeScreenSliderInProgress = false;
     if(response.isSuccess && response.statusCode == 200){
       _sliderModel = HomeScreenSliderModel.fromJson(response.responseJson ?? {});

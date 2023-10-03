@@ -27,7 +27,7 @@ class ProductsDetailsController extends GetxController {
     _getProductsDetailsInProgress = true;
     update();
     NetworkResponse response =
-        await NetworkCaller().getRequest(Urls.getProductsDetails(productsId));
+        await NetworkCaller.getRequest(Urls.getProductsDetails(productsId));
     _getProductsDetailsInProgress = false;
     if (response.isSuccess && response.statusCode == 200) {
       _productsDetails =

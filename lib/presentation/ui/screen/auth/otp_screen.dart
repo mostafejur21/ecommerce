@@ -1,6 +1,8 @@
 import 'dart:async';
+
+import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
 import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
-import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_otp_field.dart';
@@ -31,13 +33,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     super.initState();
   }
 
-  int timeLeft = 10;
+  int timeLeft = 120;
   bool wait = false;
 
   void startTimer() {
     const sec = Duration(seconds: 1);
-    // ignore: unused_local_variable
-    Timer timer = Timer.periodic(sec, (timer) {
+    Timer.periodic(sec, (timer) {
       if (timeLeft == 0) {
         setState(() {
           timer.cancel();
@@ -50,7 +51,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,26 +177,32 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     ],
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    if (wait) {
-                      startTimer();
-                      if(mounted){
-                        setState(() {
-                        });
-                      }
-                      Get.snackbar(
-                          "Otp resend success", "we have send you another otp");
-                    } else {
-                      Get.snackbar("Wait", "please wait");
+                GetBuilder<EmailVerificationController>(
+                  builder: (emailVerificationController) {
+                    if(emailVerificationController.emailVerificationInProgress){
+                      return const Center(child: CircularProgressIndicator(),);
                     }
-                  },
-                  child: Text(
-                    "Resend",
-                    style: wait == false
-                        ? const TextStyle(color: Colors.grey)
-                        : const TextStyle(color: AppColor.primaryColor),
-                  ),
+                    return TextButton(
+                      onPressed: () {
+                        if (wait) {
+                          emailVerificationController.verifyEmail(widget.email.trim());
+                          setState(() {
+                            timeLeft = 120; // Reset the timer to its initial value
+                            wait = false;
+                          });
+                          startTimer(); // Start the timer again
+                        } else {
+                          Get.snackbar("Wait", "please wait");
+                        }
+                      },
+                      child: Text(
+                        "Resend",
+                        style: wait == false
+                            ? const TextStyle(color: Colors.grey)
+                            : const TextStyle(color: AppColor.primaryColor),
+                      ),
+                    );
+                  }
                 ),
               ],
             ),
@@ -211,7 +217,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     final String otp = "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
     final response = await controller.verifyLogin(widget.email,otp);
     if(response){
-      Get.to(()=> const BottomNavBarScreen());
+      Get.to(()=> const CompleteProfileScreen());
     }else{
       Get.showSnackbar(
         const GetSnackBar(

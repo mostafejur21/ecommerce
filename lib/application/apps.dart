@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CraftyBay extends StatelessWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+
   const CraftyBay({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: CraftyBay.globalKey,
       useInheritedMediaQuery: true,
       //for devices preview
       locale: DevicePreview.locale(context),
@@ -19,6 +22,7 @@ class CraftyBay extends StatelessWidget {
       //for devices preview
       initialBinding: StateHoldersBindings(),
       debugShowCheckedModeBanner: false,
+      title: "Crafty-Bay",
       home: const SplashScreen(),
       theme: ThemeData(
         primarySwatch:

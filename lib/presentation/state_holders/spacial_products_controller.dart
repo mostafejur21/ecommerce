@@ -19,7 +19,7 @@ class SpecialProductsController extends GetxController {
     _getSpacialProductsInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller().getRequest(Urls.getProductsByRemarks('special'));
+        await NetworkCaller.getRequest(Urls.getProductsByRemarks('special'));
     _getSpacialProductsInProgress = false;
     if (response.isSuccess && response.statusCode == 200) {
       _productModel = ProductModel.fromJson(response.responseJson ?? {});

@@ -12,7 +12,7 @@ class OTPVerifyLoginController extends GetxController {
   Future<bool> verifyLogin(String email, String otp) async {
     _verifyLoginInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller().getRequest(
+    final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.verifyOtp(email, otp),
     );
     _verifyLoginInProgress = false;

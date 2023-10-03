@@ -21,4 +21,6 @@ class Urls {
 
   static String getProductsDetails(int productsId) =>
       '$_baseURL/ProductDetailsById/$productsId';
+
+  static const String addToCart = '$_baseURL/CreateCartList';
 }
