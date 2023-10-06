@@ -1,12 +1,13 @@
+import 'dart:developer';
+
 import 'package:ecommerce/data/models/products_details.dart';
 import 'package:ecommerce/presentation/state_holders/add_to_cart_controller.dart';
-import 'package:ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:ecommerce/presentation/state_holders/products_details_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/review_showing_screen.dart';
-import 'package:ecommerce/presentation/ui/widgets/bottom_price_details_and_button.dart';
+import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_stepper.dart';
-import 'package:ecommerce/presentation/ui/widgets/favorite_loveIcon_button.dart';
+import 'package:ecommerce/presentation/ui/widgets/favourite_love_icon_button.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_carousel_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_details_screen_widgets/products_details_color_selector.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_details_screen_widgets/products_details_size_selector.dart';
@@ -35,6 +36,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
 
   // ignore: unused_field
   int _selectedSizeIndex = 0;
+  int _selectedColorIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,11 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
       appBar: customAppBar("Products Details", true),
       body: GetBuilder<ProductsDetailsController>(
         builder: (productsDetailsController) {
+          if (productsDetailsController.getProductsDetailsInProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Column(
             children: [
               ProductsDetailsCarouselSlider(
@@ -62,40 +69,10 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                   ),
                 ),
               ),
-              GetBuilder<AddToCartController>(
-                builder: (addToCartController) {
-                  if (addToCartController.addToCartInProgress) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return BottomPriceDetailsAndButton(
-                    priceText: 'Price',
-                    actualPrice:
-                        '\$${productsDetailsController.productsDetails.product?.price ?? ""}',
-                    buttonText: 'Add To Cart',
-                    whatWillHappenWhenPressTheButton: () async {
-                      final results = await addToCartController.addToCart(
-                          productsDetailsController.productsDetails.id!,
-                          productsDetailsController.availableColor.toString(),
-                          productsDetailsController.productsDetails.size!);
-                      if (results) {
-                        Get.snackbar('done', "add to cart done!");
-                      } else if (AuthController.accessToken!.isEmpty) {
-                        Get.defaultDialog(
-                            title: "Login",
-                            content: const Text(
-                                "To confirm your order, you need to login first"),
-                            onCancel: () {
-                              Get.back();
-                            },
-                            onConfirm: () {
-                              AuthController.clear();
-                            });
-                      }
-                    },
-                  );
-                },
+              cartBottomContainer(
+                productsDetailsController.productsDetails,
+                productsDetailsController.availableColor,
+                productsDetailsController.availableSizes,
               ),
             ],
           );
@@ -172,8 +149,11 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
           height: 16,
         ),
         ProductsDetailsColorSelector(
-          colorCodes: productsDetails.color?.split(',') ?? [],
-        ),
+            colors: colors,
+            selectedColor: _selectedColorIndex,
+            onSelected: (int index) {
+              _selectedColorIndex = index;
+            }),
         const SizedBox(
           height: 16,
         ),
@@ -205,6 +185,132 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
           textAlign: TextAlign.justify,
         ),
       ],
+    );
+  }
+
+  // SizedBox productsDetailsColorSelector(List<String> colors) {
+  //   return SizedBox(
+  //     height: 30,
+  //     child: ListView.separated(
+  //       scrollDirection: Axis.horizontal,
+  //       itemCount: colors.length,
+  //       itemBuilder: (context, int index) {
+  //         return InkWell(
+  //           borderRadius: BorderRadius.circular(20),
+  //           onTap: () {
+  //             _selectedColorIndex = index;
+  //             if (mounted) {
+  //               setState(() {});
+  //             }
+  //           },
+  //           child: CircleAvatar(
+  //             radius: 18,
+  //             backgroundColor: HexColor.fromHex(colors[index]),
+  //             child: _selectedColorIndex == index
+  //                 ? const Icon(
+  //                     Icons.done,
+  //                     color: Colors.white,
+  //                   )
+  //                 : null,
+  //           ),
+  //         );
+  //       },
+  //       separatorBuilder: (context, int index) {
+  //         return const SizedBox(
+  //           width: 8,
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
+
+  Container cartBottomContainer(
+      ProductsDetails productsDetails, List<String> color, List<String> size) {
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      height: 88,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(24),
+          topLeft: Radius.circular(24),
+        ),
+        color: AppColor.primaryColor.withOpacity(0.2),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  "Price",
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '${productsDetails.product?.price ?? 0}',
+                  style: const TextStyle(
+                      fontSize: 18,
+                      color: AppColor.primaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 120,
+              child: GetBuilder<AddToCartController>(
+                builder: (addToCartController) {
+                  if (addToCartController.addToCartInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: () async {
+                      if (mounted) {
+                        final results = await addToCartController.addToCart(
+                            productsDetails.id!,
+                            color[_selectedColorIndex].toString(),
+                            size[_selectedSizeIndex].toString());
+
+                        if (results) {
+                          Get.snackbar("Success", "Add to cart success");
+                          log(color[_selectedColorIndex]);
+                          log(color[_selectedSizeIndex]);
+                        }
+                        //else if (AuthController.accessToken!.isEmpty) {
+                        //   Get.defaultDialog(
+                        //       title: "Login",
+                        //       content: const Text(
+                        //           "To confirm your order, you need to login first"),
+                        //       onCancel: () {
+                        //         Get.back();
+                        //       },
+                        //       onConfirm: () {
+                        //         AuthController.clear();
+                        //       });
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                    child: const Text(
+                      'Add to cart',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

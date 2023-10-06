@@ -3,7 +3,7 @@ import 'package:ecommerce/data/services/network_caller.dart';
 import 'package:ecommerce/data/utils/url_links.dart';
 import 'package:get/get.dart';
 
-class AddToCartController extends GetxController{
+class AddToCartController extends GetxController {
   bool _addToCartInProgress = false;
   String _message = '';
 
@@ -14,12 +14,9 @@ class AddToCartController extends GetxController{
   Future<bool> addToCart(int productsId, String color, String sizes) async {
     _addToCartInProgress = true;
     update();
-    final NetworkResponse response =
-    await NetworkCaller.postRequest(Urls.addToCart, {
-      "product_id": productsId,
-      "color" :color,
-      "size": sizes
-    });
+    final NetworkResponse response = await NetworkCaller.postRequest(
+        Urls.addToCart,
+        {"product_id": productsId, "color": color, "size": sizes});
     _addToCartInProgress = false;
     update();
     if (response.isSuccess) {

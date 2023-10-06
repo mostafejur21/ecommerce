@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
 import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
-import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
+import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_otp_field.dart';
@@ -40,17 +40,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     const sec = Duration(seconds: 1);
     Timer.periodic(sec, (timer) {
       if (timeLeft == 0) {
-        setState(() {
-          timer.cancel();
-          wait = true;
-        });
+        if (mounted) {
+          setState(() {
+            timer.cancel();
+            wait = true;
+          });
+        }
       } else {
-        setState(() {
-          timeLeft--;
-        });
+        if (mounted) {
+          setState(() {
+            timeLeft--;
+          });
+        }
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +69,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   height: 100,
                 ),
                 Center(
-                  child:
-                      SvgPicture.asset(ImagesUtils.craftyBayLogoSVG, width: 100),
+                  child: SvgPicture.asset(ImagesUtils.craftyBayLogoSVG,
+                      width: 100),
                 ),
                 const SizedBox(
                   height: 12,
@@ -133,31 +138,32 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: GetBuilder<OTPVerifyLoginController>(
-                    builder: (controller) {
-                      if(controller.verifyLoginInProgress){
-                        return const Center(child: CircularProgressIndicator(),);
-                      }
-                      return ElevatedButton(
-                        onPressed: () async {
-                          verifyOtp(controller);
-                          // if (_otpController1.text.isEmpty &&
-                          //     _otpController2.text.isEmpty &&
-                          //     _otpController3.text.isEmpty &&
-                          //     _otpController4.text.isEmpty) {
-                          //
-                          // } else {
-                          //   Get.to(const CompleteProfileScreen());
-                          // }
-                          // _otpController1.clear();
-                          // _otpController2.clear();
-                          // _otpController3.clear();
-                          // _otpController4.clear();
-                          // Get.offAll(const CompleteProfileScreen());
-                        },
-                        child: const Text("Next"),
+                      builder: (controller) {
+                    if (controller.verifyLoginInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
                     }
-                  ),
+                    return ElevatedButton(
+                      onPressed: () async {
+                        verifyOtp(controller);
+                        // if (_otpController1.text.isEmpty &&
+                        //     _otpController2.text.isEmpty &&
+                        //     _otpController3.text.isEmpty &&
+                        //     _otpController4.text.isEmpty) {
+                        //
+                        // } else {
+                        //   Get.to(const CompleteProfileScreen());
+                        // }
+                        // _otpController1.clear();
+                        // _otpController2.clear();
+                        // _otpController3.clear();
+                        // _otpController4.clear();
+                        // Get.offAll(const CompleteProfileScreen());
+                      },
+                      child: const Text("Next"),
+                    );
+                  }),
                 ),
                 const SizedBox(
                   height: 24,
@@ -178,32 +184,37 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ),
                 ),
                 GetBuilder<EmailVerificationController>(
-                  builder: (emailVerificationController) {
-                    if(emailVerificationController.emailVerificationInProgress){
-                      return const Center(child: CircularProgressIndicator(),);
-                    }
-                    return TextButton(
-                      onPressed: () {
-                        if (wait) {
-                          emailVerificationController.verifyEmail(widget.email.trim());
-                          setState(() {
-                            timeLeft = 120; // Reset the timer to its initial value
-                            wait = false;
-                          });
-                          startTimer(); // Start the timer again
-                        } else {
-                          Get.snackbar("Wait", "please wait");
-                        }
-                      },
-                      child: Text(
-                        "Resend",
-                        style: wait == false
-                            ? const TextStyle(color: Colors.grey)
-                            : const TextStyle(color: AppColor.primaryColor),
-                      ),
+                    builder: (emailVerificationController) {
+                  if (emailVerificationController.emailVerificationInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
                   }
-                ),
+                  return TextButton(
+                    onPressed: () {
+                      if (wait) {
+                        emailVerificationController
+                            .verifyEmail(widget.email.trim());
+                        if (mounted) {
+                          setState(() {
+                            timeLeft =
+                                120; // Reset the timer to its initial value
+                            wait = false;
+                          });
+                        }
+                        startTimer(); // Start the timer again
+                      } else {
+                        Get.snackbar("Wait", "please wait");
+                      }
+                    },
+                    child: Text(
+                      "Resend",
+                      style: wait == false
+                          ? const TextStyle(color: Colors.grey)
+                          : const TextStyle(color: AppColor.primaryColor),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
@@ -212,13 +223,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-
-  Future<void> verifyOtp(OTPVerifyLoginController controller)async{
-    final String otp = "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
-    final response = await controller.verifyLogin(widget.email,otp);
-    if(response){
-      Get.to(()=> const CompleteProfileScreen());
-    }else{
+  Future<void> verifyOtp(OTPVerifyLoginController controller) async {
+    final String otp =
+        "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
+    final response = await controller.verifyLogin(widget.email, otp);
+    if (response) {
+      Get.to(() => const BottomNavBarScreen());
+    } else {
       Get.showSnackbar(
         const GetSnackBar(
           title: "Error",
