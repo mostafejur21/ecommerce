@@ -7,7 +7,7 @@ import 'package:ecommerce/presentation/ui/screen/review_showing_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_stepper.dart';
-import 'package:ecommerce/presentation/ui/widgets/favourite_love_icon_button.dart';
+import 'package:ecommerce/presentation/ui/widgets/love_icon_button.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_carousel_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_details_screen_widgets/products_details_color_selector.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_details_screen_widgets/products_details_size_selector.dart';
@@ -31,6 +31,9 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProductsDetailsController>()
           .getProductsDetails(widget.productsId);
+      Get.find<ProductsDetailsController>()
+          .availableColor.clear();
+
     });
   }
 
