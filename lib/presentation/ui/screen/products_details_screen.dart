@@ -285,7 +285,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                         if (results) {
                           Get.snackbar("Success", "Add to cart success");
                           log(color[_selectedColorIndex]);
-                          log(color[_selectedSizeIndex]);
+                          log(size[_selectedSizeIndex]);
                         }
                         //else if (AuthController.accessToken!.isEmpty) {
                         //   Get.defaultDialog(

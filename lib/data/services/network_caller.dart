@@ -19,8 +19,7 @@ class NetworkCaller {
         return NetworkResponse(
             true, response.statusCode, jsonDecode(response.body));
       } else if (response.statusCode == 401) {
-        //here is the logic for unauthorized logic handle
-         //934gotoLogin();
+         gotoLogin();
       } else {
         return NetworkResponse(false, response.statusCode, null);
       }
@@ -42,13 +41,15 @@ class NetworkCaller {
         },
         body: jsonEncode(body),
       );
+      log(response.statusCode.toString());
+      log(response.body);
       if (response.statusCode == 200) {
         return NetworkResponse(
             true, response.statusCode, jsonDecode(response.body));
       } else if (response.statusCode == 401) {
-        // if (isLogin == false) {
-        //   gotoLogin();
-        // }
+        if (isLogin == false) {
+          gotoLogin();
+        }
       } else {
         return NetworkResponse(
           false,

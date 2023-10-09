@@ -1,4 +1,5 @@
 import 'package:ecommerce/presentation/state_holders/complete_profile_controller.dart';
+import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -146,7 +147,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                               _cityTEController.text,
                               _shippingAddressTEController.text.trim());
                           if (_formKey.currentState!.validate()) {
-                            Get.to(const HomeScreen());
+                            // OTPVerifyLoginController().setProfile;
+                            Get.offAll(()=>const HomeScreen());
                           }
                         },
                         child: const Text("Complete"),

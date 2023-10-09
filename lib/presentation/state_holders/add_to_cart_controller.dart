@@ -16,7 +16,9 @@ class AddToCartController extends GetxController {
     update();
     final NetworkResponse response = await NetworkCaller.postRequest(
         Urls.addToCart,
-        {"product_id": productsId, "color": color, "size": sizes});
+        {"product_id":productsId,
+          "color":color,
+          "size":sizes});
     _addToCartInProgress = false;
     update();
     if (response.isSuccess) {

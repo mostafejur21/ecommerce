@@ -17,12 +17,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     goToNextScreen();
+    AuthController.getAccessToken();
     super.initState();
   }
 
   Future<void> goToNextScreen() async {
     await AuthController.getAccessToken();
     Future.delayed(const Duration(seconds: 3)).then(
+
+        // (value) => Get.to(()=> const BottomNavBarScreen())
       (value) => AuthController.isLogin
           ? Get.offAll(const BottomNavBarScreen())
           : Get.to(() => const EmailVerificationScreen()),
