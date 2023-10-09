@@ -12,7 +12,6 @@ class Urls {
   static String completeProfile = "$_baseURL/CreateProfile";
   static String createProfile = "$_baseURL/CreateProfile";
   static String readProfile = "$_baseURL/ReadProfile";
-  static String cartList = "$_baseURL/CartList";
   static String createCartList = "$_baseURL/CreateCartList";
   static String homeScreenSlider = "$_baseURL/ListProductSlider";
   static String getCategories = '$_baseURL/CategoryList';
@@ -24,4 +23,5 @@ class Urls {
       '$_baseURL/ProductDetailsById/$productsId';
 
   static const String addToCart = '$_baseURL/CreateCartList';
+  static String cartList = '$_baseURL/CartList';
 }
