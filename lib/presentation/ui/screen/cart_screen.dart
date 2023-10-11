@@ -16,7 +16,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<CartListController>().getCartList();
     });
   }
@@ -25,7 +25,11 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("Cart", false),
-      body: GetBuilder<CartListController>(builder: (cartListController) {
+      body: GetBuilder<CartListController>(
+          builder: (cartListController) {
+            if(cartListController.cartListInProgress){
+              return const Center(child: CircularProgressIndicator(),);
+            }
         return Column(
           children: [
             Expanded(
@@ -70,7 +74,7 @@ class _CartScreenState extends State<CartScreen> {
                           height: 5,
                         ),
                         Text(
-                          "\$${cartListController.totalPrice}",
+                          "\$ ${cartListController.totalPrice}",
                           style: const TextStyle(
                               fontSize: 18,
                               color: AppColor.primaryColor,

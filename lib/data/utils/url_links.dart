@@ -23,5 +23,9 @@ class Urls {
       '$_baseURL/ProductDetailsById/$productsId';
 
   static const String addToCart = '$_baseURL/CreateCartList';
-  static String cartList = '$_baseURL/CartList';
+  static const String getCartList = '$_baseURL/CartList';
+  static const String productWishList = '$_baseURL/ProductWishList';
+  static String createWishList(int id) => '$_baseURL/CreateWishList/$id';
+  static String listReviewById(int id) => '$_baseURL/ListReviewByProduct/$id';
+  static const String createReview = '$_baseURL/CreateProductReview';
 }

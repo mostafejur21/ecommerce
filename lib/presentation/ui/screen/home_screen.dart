@@ -12,6 +12,7 @@ import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_screen_search_bar.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_card.dart';
+import 'package:ecommerce/presentation/ui/widgets/shimer_progress.dart';
 import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return const SizedBox(
                     height: 200,
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child: ShimerProgress(),
                     ),
                   );
                 }
@@ -64,53 +65,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 8,
               ),
               allCategoriesCardListView,
-              GetBuilder<PopularProductsController>(
-                builder: (controller) {
-                  return TitleHeaderAndSeeAllButton(
-                    title: "Popular",
-                    onTap: () {
+              GetBuilder<PopularProductsController>(builder: (controller) {
+                return TitleHeaderAndSeeAllButton(
+                  title: "Popular",
+                  onTap: () {
                     Get.to(
                       ItemsScreen(
-                          title: 'Popular',
-                          products: controller.productModel,
+                        title: 'Popular',
+                        products: controller.productModel,
                       ),
                     );
                   },
                 );
-                }
-              ),
+              }),
               popularItemsListView,
               GetBuilder<SpecialProductsController>(
                   builder: (specialController) {
-                    return TitleHeaderAndSeeAllButton(
-                      title: "Special",
-                      onTap: () {
-                        Get.to(
-                          ItemsScreen(
-                            title: 'Special',
-                            products: specialController.productModel,
-                          ),
-                        );
-                      },
+                return TitleHeaderAndSeeAllButton(
+                  title: "Special",
+                  onTap: () {
+                    Get.to(
+                      ItemsScreen(
+                        title: 'Special',
+                        products: specialController.productModel,
+                      ),
                     );
-                  }
-              ),
+                  },
+                );
+              }),
               specialItemListView,
-              GetBuilder<NewProductsController>(
-                  builder: (newController) {
-                    return TitleHeaderAndSeeAllButton(
-                      title: "New",
-                      onTap: () {
-                        Get.to(
-                          ItemsScreen(
-                            title: 'New',
-                            products: newController.productModel,
-                          ),
-                        );
-                      },
+              GetBuilder<NewProductsController>(builder: (newController) {
+                return TitleHeaderAndSeeAllButton(
+                  title: "New",
+                  onTap: () {
+                    Get.to(
+                      ItemsScreen(
+                        title: 'New',
+                        products: newController.productModel,
+                      ),
                     );
-                  }
-              ),
+                  },
+                );
+              }),
               newItemListView,
             ],
           ),
@@ -135,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return ProductsCard(
               product: newController.productModel.data![index],
+              isShowDeleteButton: false,
             );
           },
         );
@@ -145,23 +142,24 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get specialItemListView {
     return SizedBox(
       height: 182,
-      child:
-      GetBuilder<SpecialProductsController>(builder: (specialController) {
-        if (specialController.getSpecialProductsInProgress) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return ListView.builder(
-          addAutomaticKeepAlives: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: specialController.productModel.data?.length ?? 0,
-          itemBuilder: (context, index) {
-            return ProductsCard(
-              product: specialController.productModel.data![index],
+      child: GetBuilder<SpecialProductsController>(
+        builder: (specialController) {
+          if (specialController.getSpecialProductsInProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
+          }
+          return ListView.builder(
+            addAutomaticKeepAlives: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: specialController.productModel.data?.length ?? 0,
+            itemBuilder: (context, index) {
+              return ProductsCard(
+                product: specialController.productModel.data![index],
+                isShowDeleteButton: false,
+              );
+            },
+          );
         },
       ),
     );
@@ -183,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return ProductsCard(
               product: popularProductsController.productModel.data![index],
+              isShowDeleteButton: false,
             );
           },
         );

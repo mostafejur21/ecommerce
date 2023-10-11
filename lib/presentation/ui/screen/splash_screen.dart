@@ -17,7 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     goToNextScreen();
-    AuthController.getAccessToken();
     super.initState();
   }
 

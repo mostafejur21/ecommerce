@@ -26,6 +26,7 @@ class CompleteProfileController extends GetxController {
       },
     );
     _completeProfileInProgress = false;
+    update();
     if (response.isSuccess && response.statusCode == 200) {
       return true;
     } else {

@@ -104,7 +104,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     final response =
         await controller.verifyEmail(_emailTEController.text.trim());
     if (response) {
-      Get.to(() => OtpVerificationScreen(email: _emailTEController.text,),);
+      Get.to(
+        () => OtpVerificationScreen(
+          email: _emailTEController.text,
+        ),
+      );
     } else {
       Get.snackbar(
           "error", "Email verification has been failed! please try again");

@@ -25,8 +25,8 @@ class OTPVerifyLoginController extends GetxController {
       return false;
     }
   }
-  // void setProfile (){
-  //   _isProfileComplete = true;
-  //   update();
-  // }
+  void setProfile (){
+    _isProfileComplete = true;
+    update();
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ecommerce/data/models/products_details.dart';
 import 'package:ecommerce/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:ecommerce/presentation/state_holders/create_wish_list.dart';
 import 'package:ecommerce/presentation/state_holders/products_details_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/review_showing_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
@@ -31,9 +32,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProductsDetailsController>()
           .getProductsDetails(widget.productsId);
-      Get.find<ProductsDetailsController>()
-          .availableColor.clear();
-
+      Get.find<ProductsDetailsController>().availableColor.clear();
     });
   }
 
@@ -129,7 +128,9 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
             TextButton(
               onPressed: () {
                 Get.to(
-                  const ReviewsScreen(),
+                  () => ReviewsScreen(
+                    productsId: productsDetails.productId ?? 0,
+                  ),
                 );
               },
               child: const Text(
@@ -140,7 +141,13 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                 ),
               ),
             ),
-            const FavoriteLoveIconButton(),
+            InkWell(
+              onTap: () {
+                Get.find<CreateWishListController>()
+                    .createWishList(productsDetails.productId!);
+              },
+              child: const FavoriteLoveIconButton(),
+            ),
           ],
         ),
         const Text(
@@ -276,29 +283,27 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                   }
                   return ElevatedButton(
                     onPressed: () async {
-                      if (mounted) {
-                        final results = await addToCartController.addToCart(
-                            productsDetails.id!,
-                            color[_selectedColorIndex].toString(),
-                            size[_selectedSizeIndex].toString());
+                      final results = await addToCartController.addToCart(
+                          productsDetails.id!,
+                          color[_selectedColorIndex].toString(),
+                          size[_selectedSizeIndex].toString());
 
-                        if (results) {
-                          Get.snackbar("Success", "Add to cart success");
-                          log(color[_selectedColorIndex]);
-                          log(size[_selectedSizeIndex]);
-                        }
-                        //else if (AuthController.accessToken!.isEmpty) {
-                        //   Get.defaultDialog(
-                        //       title: "Login",
-                        //       content: const Text(
-                        //           "To confirm your order, you need to login first"),
-                        //       onCancel: () {
-                        //         Get.back();
-                        //       },
-                        //       onConfirm: () {
-                        //         AuthController.clear();
-                        //       });
+                      if (results) {
+                        Get.snackbar("Success", "Add to cart success");
+                        log(color[_selectedColorIndex]);
+                        log(size[_selectedSizeIndex]);
                       }
+                      //else if (AuthController.accessToken!.isEmpty) {
+                      //   Get.defaultDialog(
+                      //       title: "Login",
+                      //       content: const Text(
+                      //           "To confirm your order, you need to login first"),
+                      //       onCancel: () {
+                      //         Get.back();
+                      //       },
+                      //       onConfirm: () {
+                      //         AuthController.clear();
+                      //       });
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 8),

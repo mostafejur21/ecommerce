@@ -1,4 +1,5 @@
 import 'package:ecommerce/data/models/products.dart';
+import 'package:ecommerce/presentation/state_holders/create_wish_list.dart';
 import 'package:ecommerce/presentation/ui/screen/products_details_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,11 @@ import 'package:get/get.dart';
 class ProductsCard extends StatelessWidget {
   const ProductsCard({
     super.key,
-    required this.product,
+    required this.product, required this.isShowDeleteButton,
   });
 
   final Product product;
+  final bool isShowDeleteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class ProductsCard extends StatelessWidget {
                       topRight: Radius.circular(8)),
                   color: AppColor.primaryColor.withOpacity(0.2),
                   image: DecorationImage(
-                    image: NetworkImage(product.image ?? ''),
+                    image: NetworkImage(product.image ?? 'https://assets.adidas.com/images/w_600,f_auto,q_auto/f9d52817f7524d3fb442af3b01717dfa_9366/Runfalcon_3.0_Shoes_Black_HQ3790_01_standard.jpg', ),
                   ),
                 ),
               ),
@@ -46,7 +48,7 @@ class ProductsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title ?? "",
+                      product.title ?? "New year sell Shoe",
                       maxLines: 1,
                       style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -58,7 +60,7 @@ class ProductsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "\$${product.price ?? 0}",
+                          "\$${product.price ?? 2000}",
                           style: const TextStyle(
                               color: AppColor.primaryColor,
                               fontSize: 14,
@@ -73,7 +75,7 @@ class ProductsCard extends StatelessWidget {
                               color: Colors.amber,
                             ),
                             Text(
-                              "${product.star ?? 0}",
+                              "${product.star ?? 4.0}",
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 13,
@@ -82,18 +84,26 @@ class ProductsCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6)),
-                          color: AppColor.primaryColor,
-                          child: const Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: Icon(
-                              Icons.favorite_border,
-                              size: 12,
-                              color: Colors.white70,
+                        InkWell(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                            color: AppColor.primaryColor,
+                            child:  Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Icon(
+                                isShowDeleteButton == false ? Icons.favorite_border : Icons.delete,
+                                size: 12,
+                                color: Colors.white70,
+                              ),
                             ),
                           ),
+                          onTap: (){
+                            isShowDeleteButton == false
+                                ? Get.find<CreateWishListController>()
+                                    .createWishList(product.id!)
+                                : null;
+                          },
                         )
                       ],
                     )
