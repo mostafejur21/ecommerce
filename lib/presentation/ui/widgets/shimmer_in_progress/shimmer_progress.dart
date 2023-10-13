@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimerProgress extends StatelessWidget {
-  const ShimerProgress({super.key});
+class ShimmerProgressForCarouselSlider extends StatelessWidget {
+  const ShimmerProgressForCarouselSlider({super.key});
 
   @override
   Widget build(BuildContext context) {

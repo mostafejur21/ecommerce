@@ -12,7 +12,8 @@ import 'package:ecommerce/presentation/ui/widgets/categories_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_screen_search_bar.dart';
 import 'package:ecommerce/presentation/ui/widgets/home_screen_widgets/home_slider.dart';
 import 'package:ecommerce/presentation/ui/widgets/products_card.dart';
-import 'package:ecommerce/presentation/ui/widgets/shimer_progress.dart';
+import 'package:ecommerce/presentation/ui/widgets/shimmer_in_progress/shimmer_popular.dart';
+import 'package:ecommerce/presentation/ui/widgets/shimmer_in_progress/shimmer_progress.dart';
 import 'package:ecommerce/presentation/ui/widgets/title_header_and_see_all_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return const SizedBox(
                     height: 200,
                     child: Center(
-                      child: ShimerProgress(),
+                      child: ShimmerProgressForCarouselSlider(),
                     ),
                   );
                 }
@@ -66,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               allCategoriesCardListView,
               GetBuilder<PopularProductsController>(builder: (controller) {
+
                 return TitleHeaderAndSeeAllButton(
                   title: "Popular",
                   onTap: () {
@@ -171,8 +173,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GetBuilder<PopularProductsController>(
           builder: (popularProductsController) {
         if (popularProductsController.getPopularProductsInProgress) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return const Row(
+            children: [
+              ShimmerPopular(height: 160, width: 150,),
+              ShimmerPopular(height: 160, width: 150,),
+            ],
           );
         }
         return ListView.builder(

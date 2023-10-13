@@ -102,6 +102,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -127,6 +128,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                 ),
               ],
             ),
+
             const SizedBox(
               height: 8,
             ),
