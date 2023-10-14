@@ -27,7 +27,7 @@ class CartListTileCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.white,
                 image: DecorationImage(
-                    image: NetworkImage(cartData.product?.image ?? ''))),
+                    image: NetworkImage(cartData.product?.image ?? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80'),),),
           ),
           const SizedBox(
             width: 8,
@@ -76,7 +76,7 @@ class CartListTileCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$${cartData.product?.price ?? ''}',
+                        '\$${cartData.product?.price ?? '2000'}',
                         style: const TextStyle(
                             color: AppColor.primaryColor,
                             fontSize: 18,

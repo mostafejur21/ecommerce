@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
+import 'package:ecommerce/presentation/state_holders/read_profile_controller.dart';
 import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
@@ -231,11 +232,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
     final response = await controller.verifyLogin(widget.email, otp);
     if (response) {
-      OTPVerifyLoginController.isProfileComplete == true
-          ? Get.offAll(
-              () => const BottomNavBarScreen(),
-            )
-          : Get.to(() => const CompleteProfileScreen());
+      Get.snackbar("Success", " ");
+      await Future.delayed(const Duration(seconds: 3)).then((value) async =>
+          await Get.find<ReadProfileController>().readProfileData());
+      Get.find<ReadProfileController>().readProfileModel.data?.length == 1
+          ? Get.offAll(() => const BottomNavBarScreen())
+          : Get.offAll(() => const CompleteProfileScreen());
     } else {
       Get.showSnackbar(
         const GetSnackBar(

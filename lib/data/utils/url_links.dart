@@ -11,7 +11,7 @@ class Urls {
       '$_baseURL/VerifyLogin/$email/$otp';
   static String completeProfile = "$_baseURL/CreateProfile";
   static String createProfile = "$_baseURL/CreateProfile";
-  static String readProfile = "$_baseURL/ReadProfile";
+  static String userReadProfile = "$_baseURL/ReadProfile";
   static String createCartList = "$_baseURL/CreateCartList";
   static String homeScreenSlider = "$_baseURL/ListProductSlider";
   static String getCategories = '$_baseURL/CategoryList';

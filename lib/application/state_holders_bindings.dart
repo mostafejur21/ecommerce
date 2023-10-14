@@ -11,6 +11,7 @@ import 'package:ecommerce/presentation/state_holders/new_products_controller.dar
 import 'package:ecommerce/presentation/state_holders/popular_products_controller.dart';
 import 'package:ecommerce/presentation/state_holders/products_details_controller.dart';
 import 'package:ecommerce/presentation/state_holders/products_wish_list_controller.dart';
+import 'package:ecommerce/presentation/state_holders/read_profile_controller.dart';
 import 'package:ecommerce/presentation/state_holders/review_list_controller.dart';
 import 'package:ecommerce/presentation/state_holders/spacial_products_controller.dart';
 import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
@@ -35,5 +36,6 @@ class StateHoldersBindings extends Bindings {
     Get.put(CreateWishListController());
     Get.put(ReviewListController());
     Get.put(CreateReviewController());
+    Get.put(ReadProfileController());
   }
 }
