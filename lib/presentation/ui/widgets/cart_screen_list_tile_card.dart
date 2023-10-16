@@ -1,5 +1,6 @@
 import 'package:ecommerce/data/models/cart_list_data.dart';
 import 'package:ecommerce/presentation/state_holders/cart_list_controller.dart';
+import 'package:ecommerce/presentation/state_holders/delete_cart_list.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
@@ -67,9 +68,20 @@ class CartListTileCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.delete_outline))
+                      GetBuilder<DeleteCartListController>(
+                        builder: (deleteController) {
+                          return IconButton(
+                              onPressed: () async{
+                                bool delete = await deleteController.deleteCartId(cartData.productId!);
+                                if(delete){
+                                  Get.snackbar("success", "products deleted successfully");
+                                }else{
+                                  Get.snackbar("failed", "products delete failed");
+                                }
+                              },
+                              icon: const Icon(Icons.delete_outline));
+                        }
+                      )
                     ],
                   ),
                   Row(
