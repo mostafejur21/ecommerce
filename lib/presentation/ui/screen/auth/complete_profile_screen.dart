@@ -1,4 +1,4 @@
-import 'package:ecommerce/presentation/state_holders/complete_profile_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/complete_profile_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/images_utils.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/email_verification_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/verify_login_controller.dart';
 import 'package:ecommerce/presentation/state_holders/read_profile_controller.dart';
-import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/complete_profile_screen.dart';
 import 'package:ecommerce/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';

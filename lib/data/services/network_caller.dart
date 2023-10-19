@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:ecommerce/application/apps.dart';
 import 'package:ecommerce/data/models/network_response.dart';
-import 'package:ecommerce/presentation/state_holders/auth_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/auth_controller.dart';
 import 'package:ecommerce/presentation/ui/screen/auth/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';

@@ -1,4 +1,3 @@
-import 'package:ecommerce/data/models/cart_list_data.dart';
 import 'package:ecommerce/data/models/cart_list_model.dart';
 import 'package:ecommerce/presentation/state_holders/cart_list_controller.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
@@ -30,8 +29,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar("Cart", false),
-      body: data.data != null
-          ? GetBuilder<CartListController>(
+      body:  GetBuilder<CartListController>(
               builder: (cartListController) {
                 if (cartListController.cartListInProgress) {
                   return const Center(
@@ -111,13 +109,13 @@ class _CartScreenState extends State<CartScreen> {
                 );
               },
             )
-          : Center(
+           /*Center(
               child: Text(
                 "Cart is empty, please add some products",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontStyle: FontStyle.italic, color: Colors.purpleAccent),
               ),
-            ),
+            ),*/
     );
   }
 }

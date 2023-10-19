@@ -53,12 +53,9 @@ class _CraftyBayState extends State<CraftyBay> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       navigatorKey: CraftyBay.globalKey,
-      useInheritedMediaQuery: true,
-      //for devices preview
-      locale: DevicePreview.locale(context),
-      //for devices preview
-      builder: DevicePreview.appBuilder,
-      //for devices preview
+      useInheritedMediaQuery: true, //for devices preview
+      locale: DevicePreview.locale(context), //for devices preview
+      builder: DevicePreview.appBuilder, //for devices preview
       initialBinding: StateHoldersBindings(),
       debugShowCheckedModeBanner: false,
       title: "Crafty-Bay",

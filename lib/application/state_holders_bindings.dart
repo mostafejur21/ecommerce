@@ -1,11 +1,12 @@
 import 'package:ecommerce/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/verify_login_controller.dart';
 import 'package:ecommerce/presentation/state_holders/cart_list_controller.dart';
 import 'package:ecommerce/presentation/state_holders/categories_controller.dart';
-import 'package:ecommerce/presentation/state_holders/complete_profile_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/complete_profile_controller.dart';
 import 'package:ecommerce/presentation/state_holders/create_review_controller.dart';
 import 'package:ecommerce/presentation/state_holders/create_wish_list.dart';
 import 'package:ecommerce/presentation/state_holders/delete_cart_list.dart';
-import 'package:ecommerce/presentation/state_holders/email_verification_controller.dart';
+import 'package:ecommerce/presentation/state_holders/authentication_controller/email_verification_controller.dart';
 import 'package:ecommerce/presentation/state_holders/home_screen_slider_controller.dart';
 import 'package:ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce/presentation/state_holders/new_products_controller.dart';
@@ -15,7 +16,6 @@ import 'package:ecommerce/presentation/state_holders/products_wish_list_controll
 import 'package:ecommerce/presentation/state_holders/read_profile_controller.dart';
 import 'package:ecommerce/presentation/state_holders/review_list_controller.dart';
 import 'package:ecommerce/presentation/state_holders/spacial_products_controller.dart';
-import 'package:ecommerce/presentation/state_holders/verify_login_controller.dart';
 import 'package:get/get.dart';
 
 class StateHoldersBindings extends Bindings {
