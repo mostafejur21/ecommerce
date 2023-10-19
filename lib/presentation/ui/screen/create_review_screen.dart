@@ -1,4 +1,5 @@
 import 'package:ecommerce/presentation/state_holders/create_review_controller.dart';
+import 'package:ecommerce/presentation/state_holders/review_list_controller.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,15 +96,17 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                             controller
                                 .createReview(_reviewTEController.text.trim(),
                                     widget.productsId)
-                                .then((result) {
-                              if (result) {
-                                _firstNameTEController.clear();
-                                _lastNameTEController.clear();
-                                _reviewTEController.clear();
-                                Get.snackbar('done', "review added done");
-                              }
-                              Get.back();
-                            });
+                                .then(
+                              (result) {
+                                if (result) {
+                                  _firstNameTEController.clear();
+                                  _lastNameTEController.clear();
+                                  _reviewTEController.clear();
+                                  Get.snackbar('done', "review added done");
+                                  Get.back(result: Get.find<ReviewListController>().getReview(widget.productsId));
+                                }
+                              },
+                            );
                           }
                         },
                         child: const Text("Submit"),
