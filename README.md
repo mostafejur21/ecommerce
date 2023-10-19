@@ -4,29 +4,43 @@
 
 Welcome to Crafty-Bay. A full e-commerce application build using flutter, getx . This app is a complete ecommerce app with all the features like add to cart, wishlist, review, checkout etc. This app is built with flutter and dart.
 
+## Responsibilities
+
+As the creator of CraftyBay, my responsibilities included:
+
+* Designing the app's user interface (UI).
+* Developing the complete ecommerce app.
+* Adding user profiles for a personalized shopping experience.
+* Allowing product addition to wishlists for user convenience.
+* Implementing color and size filters for product selection.
+* Categorizing products into four distinct categories.
+* Showcasing special, new, and popular products.
+* Creating an attractive product carousel slider.
+* Enabling users to write and share product reviews.
+
 ## Features of the app With Screenshots
 
-- [x] Splash Screen
+* [x] Splash Screen
 ![Alt text](assets/screenshots/Screenshot_20231019_224257.png)
-- [x] Login Screen
+* [x] Login Screen
  ![Alt text](assets/screenshots/13.png)
-- [x] Complete Profile Screen
+* [x] Complete Profile Screen
 ![Alt text](assets/screenshots/11.png)
-- [x] OTP Verification Screen
+* [x] OTP Verification Screen
 ![Alt text](assets/screenshots/12.png)
-- [x] Home Screen
+* [x] Home Screen
 ![Alt text](assets/screenshots/2.png)
-- [x] Categories Screen
+* [x] Categories Screen
 ![Alt text](assets/screenshots/4.png)
-- [x] Products Details Screen
+* [x] Products Details Screen
 ![Alt text](assets/screenshots/7.png)
-- [x] Cart Screen
+* [x] Cart Screen
 ![Alt text](assets/screenshots/10.png)
-- [x] Wish List Screen
+* [x] Wish List Screen
 ![Alt text](assets/screenshots/5.png)
-- [x] Review Showing Screen
+* [x] Review Showing Screen
 ![Alt text](assets/screenshots/8.png)
-- [x] Create Review Screen
+* [x] Create Review Screen
 ![Alt text](assets/screenshots/9.png)
 
 ## folder structure
@@ -121,3 +135,7 @@ craftyBay/
         │           └── title_header_and_see_all_button.dart
         └── main.dart
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
