@@ -20,29 +20,32 @@ As the creator of CraftyBay, my responsibilities included:
 
 ## Features of the app With Screenshots
 
-* [x] Splash Screen
-![Alt text](assets/screenshots/Screenshot_20231019_224257.png)
-* [x] Login Screen
- ![Alt text](assets/screenshots/13.png)
-* [x] Complete Profile Screen
-![Alt text](assets/screenshots/11.png)
-* [x] OTP Verification Screen
-![Alt text](assets/screenshots/12.png)
-* [x] Home Screen
-![Alt text](assets/screenshots/2.png)
-* [x] Categories Screen
-![Alt text](assets/screenshots/4.png)
-* [x] Products Details Screen
-![Alt text](assets/screenshots/7.png)
-* [x] Cart Screen
-![Alt text](assets/screenshots/10.png)
-* [x] Wish List Screen
-![Alt text](assets/screenshots/5.png)
-* [x] Review Showing Screen
-![Alt text](assets/screenshots/8.png)
-* [x] Create Review Screen
-![Alt text](assets/screenshots/9.png)
+| Task                | Screenshot                                  | Task                | Screenshot                                  |
+|---------------------|--------------------------------------------|---------------------|--------------------------------------------|
+| Splash Screen   | ![Splash Screen](assets/screenshots/Screenshot_20231019_224257.png) | Login Screen    | ![Login Screen](assets/screenshots/13.png)    |
+| Complete Profile Screen | ![Complete Profile Screen](assets/screenshots/11.png) | OTP Verification Screen | ![OTP Verification Screen](assets/screenshots/12.png) |
+| Home Screen     | ![Home Screen](assets/screenshots/2.png) | Categories Screen | ![Categories Screen](assets/screenshots/4.png)   |
+| Products Details Screen | ![Products Details Screen](assets/screenshots/7.png) | Cart Screen | ![Cart Screen](assets/screenshots/10.png) |
+| Wish List Screen | ![Wish List Screen](assets/screenshots/5.png) | Review Showing Screen | ![Review Showing Screen](assets/screenshots/8.png) |
+| Create Review Screen | ![Create Review Screen](assets/screenshots/9.png) |
 
+## Used Packages
+
+CraftyBay integrates the following packages to enhance functionality:
+
+* `flutter_svg: ^2.0.7:` A Flutter package for rendering SVG (Scalable Vector Graphics) images. It allows you to easily display and manipulate SVG files in your Flutter application.
+
+* `get: ^4.6.5:` Get is a state management library for Flutter that simplifies the process of managing application state. It provides a clean and efficient way to handle state and dependencies in your app.
+
+* `font_awesome_flutter: ^10.5.0:` This package allows you to easily integrate Font Awesome icons into your Flutter application. Font Awesome is a popular library of vector icons.
+* `pin_code_fields: ^8.0.1:` Pin Code Fields is a Flutter package that helps you implement PIN or OTP input fields in your app. It's highly customizable and easy to use for user authentication and verification.
+* `carousel_slider: ^4.2.1:` Carousel Slider is a package for creating image carousels and sliders in your Flutter app. It's useful for creating interactive and dynamic image galleries.
+* `http: ^1.1.0:` The HTTP package provides a straightforward way to make HTTP requests in your Flutter app. It's essential for fetching data from APIs and working with web services.
+* `flutter_launcher_icons: ^0.13.1:` This package simplifies the process of generating and setting app icons for your Flutter application. It allows you to customize app icons with ease.
+* `shared_preferences: ^2.2.1:` Shared Preferences is a Flutter package for persisting simple key-value data in a platform-agnostic manner. It's commonly used for storing app settings and small amounts of data.
+* `shimmer: ^3.0.0:` Shimmer is a package for adding a shimmering effect to your Flutter widgets. It's often used to create loading or placeholder animations to improve user experience.
+* `connectivity_plus: ^5.0.1:` Connectivity Plus is a Flutter package for monitoring network connectivity. It helps you check the status of the device's network connection and react to changes in connectivity.
+  
 ## folder structure
 
 ```root
