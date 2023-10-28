@@ -27,7 +27,8 @@ class ReviewListModel {
 class ReviewData {
   int? id;
   String? description;
-  String? email;
+  String? rating;
+  int? customerId;
   int? productId;
   String? createdAt;
   String? updatedAt;
@@ -36,7 +37,8 @@ class ReviewData {
   ReviewData(
       {this.id,
         this.description,
-        this.email,
+        this.rating,
+        this.customerId,
         this.productId,
         this.createdAt,
         this.updatedAt,
@@ -45,7 +47,8 @@ class ReviewData {
   ReviewData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
-    email = json['email'];
+    rating = json['rating'];
+    customerId = json['customer_id'];
     productId = json['product_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -57,7 +60,8 @@ class ReviewData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['description'] = description;
-    data['email'] = email;
+    data['rating'] = rating;
+    data['customer_id'] = customerId;
     data['product_id'] = productId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
@@ -70,49 +74,19 @@ class ReviewData {
 
 class Profile {
   int? id;
-  String? firstName;
-  String? lastName;
-  String? mobile;
-  String? city;
-  String? shippingAddress;
-  String? email;
-  String? createdAt;
-  String? updatedAt;
+  String? cusName;
 
-  Profile(
-      {this.id,
-        this.firstName,
-        this.lastName,
-        this.mobile,
-        this.city,
-        this.shippingAddress,
-        this.email,
-        this.createdAt,
-        this.updatedAt});
+  Profile({this.id, this.cusName});
 
   Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    mobile = json['mobile'];
-    city = json['city'];
-    shippingAddress = json['shippingAddress'];
-    email = json['email'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    cusName = json['cus_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['mobile'] = mobile;
-    data['city'] = city;
-    data['shippingAddress'] = shippingAddress;
-    data['email'] = email;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    data['cus_name'] = cusName;
     return data;
   }
 }

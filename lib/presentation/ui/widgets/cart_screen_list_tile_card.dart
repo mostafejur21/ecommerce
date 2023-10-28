@@ -101,7 +101,7 @@ class CartListTileCard extends StatelessWidget {
                             lowerLimit: 1,
                             upperLimit: 20,
                             stepValue: 1,
-                            value: cartData.numberOfItems,
+                          value: int.parse(cartData.qty!),
                             onChanged: (int value) {
                               Get.find<CartListController>()
                                   .changeItem(cartData.id!, value);

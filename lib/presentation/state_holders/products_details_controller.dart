@@ -31,8 +31,7 @@ class ProductsDetailsController extends GetxController {
     if (response.isSuccess && response.statusCode == 200) {
       _productsDetails =
           ProductsDetailsModel.fromJson(response.responseJson ?? {})
-              .data!
-              .first;
+              .data!.first;
 
       _convertedStringToColor(_productsDetails.color ?? "");
       _convertStringToSizes(_productsDetails.size ?? "");

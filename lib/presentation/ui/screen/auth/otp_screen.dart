@@ -28,6 +28,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpController2 = TextEditingController();
   final TextEditingController _otpController3 = TextEditingController();
   final TextEditingController _otpController4 = TextEditingController();
+  final TextEditingController _otpController5 = TextEditingController();
+  final TextEditingController _otpController6 = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -89,7 +91,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   height: 4,
                 ),
                 Text(
-                  "A 4 digit otp code has been sent",
+                  "A 6 digit otp code has been sent",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
@@ -133,6 +135,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     otpController2: _otpController2,
                     otpController3: _otpController3,
                     otpController4: _otpController4,
+                    otpController5: _otpController5,
+                    otpController6: _otpController6,
                   ),
                 ),
                 const SizedBox(
@@ -229,13 +233,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Future<void> verifyOtp(OTPVerifyLoginController controller) async {
     final String otp =
-        "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}";
+        "${_otpController1.text.trim()}${_otpController2.text.trim()}${_otpController3.text.trim()}${_otpController4.text.trim()}${_otpController5.text.trim()}${_otpController6.text.trim()}";
     final response = await controller.verifyLogin(widget.email, otp);
     if (response) {
       Get.snackbar("Success", " ");
-      await Future.delayed(const Duration(seconds: 3)).then((value) async =>
-          await Get.find<ReadProfileController>().readProfileData());
-      Get.find<ReadProfileController>().readProfileModel.data?.length == 1
+          await Get.find<ReadProfileController>().readProfileData();
+      Get.find<ReadProfileController>().readProfileModel.data == null
           ? Get.offAll(() => const BottomNavBarScreen())
           : Get.offAll(() => const CompleteProfileScreen());
     } else {

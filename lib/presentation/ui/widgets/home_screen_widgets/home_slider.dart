@@ -38,32 +38,37 @@ class _HomeSliderState extends State<HomeSlider> {
                       color: AppColor.primaryColor,
                       borderRadius: BorderRadius.circular(8)),
                   alignment: Alignment.center,
-                  child: Row(
+                  child: Stack(
                     children: [
                       Image.network(
-                        sliderData.image ?? '',
-                        scale: 1.2,
+                        sliderData.image ?? "",
+                        fit: BoxFit.fitHeight,
+                        height: double.infinity,
+                        width: double.infinity,
                       ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            sliderData.title ?? '',
+                      Positioned(
+                        top: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            sliderData.title ?? "",
                             style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          SizedBox(
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
                             height: 35,
                             width: 120,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.symmetric(vertical: 8),
                                 backgroundColor: Colors.white,
                               ),
                               onPressed: () {},
@@ -74,7 +79,7 @@ class _HomeSliderState extends State<HomeSlider> {
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ],
                   ),

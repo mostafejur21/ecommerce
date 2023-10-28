@@ -11,17 +11,21 @@ class ProductsDetailsModel {
     if (json['data'] != null) {
       data = <ProductsDetails>[];
       json['data'].forEach((v) {
-        data!.add(ProductsDetails.fromJson(v));
+        data!.add(new ProductsDetails.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['msg'] = msg;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['msg'] = this.msg;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
+
+
+
+

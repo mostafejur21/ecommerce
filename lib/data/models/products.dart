@@ -10,7 +10,7 @@ class Product {
   String? discountPrice;
   String? image;
   int? stock;
-  double? star;
+  int? star;
   String? remark;
   int? categoryId;
   int? brandId;
@@ -52,33 +52,33 @@ class Product {
     brandId = json['brand_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    brand = json['brand'] != null ? Brand.fromJson(json['brand']) : null;
+    brand = json['brand'] != null ? new Brand.fromJson(json['brand']) : null;
     category = json['category'] != null
-        ? CategoryData.fromJson(json['category'])
+        ? new CategoryData.fromJson(json['category'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['short_des'] = shortDes;
-    data['price'] = price;
-    data['discount'] = discount;
-    data['discount_price'] = discountPrice;
-    data['image'] = image;
-    data['stock'] = stock;
-    data['star'] = star;
-    data['remark'] = remark;
-    data['category_id'] = categoryId;
-    data['brand_id'] = brandId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (brand != null) {
-      data['brand'] = brand!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['short_des'] = this.shortDes;
+    data['price'] = this.price;
+    data['discount'] = this.discount;
+    data['discount_price'] = this.discountPrice;
+    data['image'] = this.image;
+    data['stock'] = this.stock;
+    data['star'] = this.star;
+    data['remark'] = this.remark;
+    data['category_id'] = this.categoryId;
+    data['brand_id'] = this.brandId;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.brand != null) {
+      data['brand'] = this.brand!.toJson();
     }
-    if (category != null) {
-      data['category'] = category!.toJson();
+    if (this.category != null) {
+      data['category'] = this.category!.toJson();
     }
     return data;
   }

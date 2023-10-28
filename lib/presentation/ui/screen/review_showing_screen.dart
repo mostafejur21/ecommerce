@@ -119,7 +119,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    data.profile?.firstName ?? "Mostafejur Rahman",
+                    data.profile?.cusName ?? "Mostafejur Rahman",
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,

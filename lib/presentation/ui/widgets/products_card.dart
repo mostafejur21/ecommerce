@@ -21,7 +21,7 @@ class ProductsCard extends StatelessWidget {
         Get.to(() => ProductsDetailsScreen(productsId: product.id!));
       },
       child: Card(
-        elevation: 5,
+        elevation: 8,
         shadowColor: AppColor.primaryColor.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -38,7 +38,10 @@ class ProductsCard extends StatelessWidget {
                       topRight: Radius.circular(8)),
                   color: AppColor.primaryColor.withOpacity(0.2),
                   image: DecorationImage(
-                    image: NetworkImage(product.image ?? 'https://assets.adidas.com/images/w_600,f_auto,q_auto/f9d52817f7524d3fb442af3b01717dfa_9366/Runfalcon_3.0_Shoes_Black_HQ3790_01_standard.jpg', ),
+                    fit: BoxFit.fitWidth,
+                    image: NetworkImage(product.image ?? 'https://assets.adidas.com/images/w_600,f_auto,q_auto/f9d52817f7524d3fb442af3b01717dfa_9366/Runfalcon_3.0_Shoes_Black_HQ3790_01_standard.jpg',
+
+                    ),
                   ),
                 ),
               ),

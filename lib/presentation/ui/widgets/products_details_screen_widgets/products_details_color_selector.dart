@@ -1,4 +1,4 @@
-import 'package:ecommerce/presentation/ui/utils/color_extension.dart';
+import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductsDetailsColorSelector extends StatefulWidget {
@@ -24,25 +24,24 @@ class _ProductsDetailsColorSelectorState extends State<ProductsDetailsColorSelec
         itemCount: widget.colors.length,
         itemBuilder: (context, int index) {
           return InkWell(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(4),
             onTap: () {
               colorSelectedIndex = index;
               widget.onSelected(index);
-              if(mounted){
-                setState(() {
-
-                });
+              if (mounted) {
+                setState(() {});
               }
             },
-            child: CircleAvatar(
-              radius: 18,
-              backgroundColor: HexColor.fromHex(widget.colors[index]),
-              child: colorSelectedIndex == index
-                  ? const Icon(
-                Icons.done,
-                color: Colors.white,
-              )
-                  : null,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(30),
+                color:
+                colorSelectedIndex == index ? AppColor.primaryColor : null,
+              ),
+              alignment: Alignment.center,
+              child: Text(widget.colors[index]),
             ),
           );
         },

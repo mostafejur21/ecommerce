@@ -1,7 +1,7 @@
 class Urls {
   Urls._();
 
-  static const String _baseURL = "https://craftybay.teamrabbil.com/api";
+  static const String _baseURL = "https://ecom-api.teamrabbil.com/api";
   static String brandList = "$_baseURL/BrandList";
   static String categoryList = "$_baseURL/CategoryList";
 

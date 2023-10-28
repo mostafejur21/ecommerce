@@ -17,8 +17,7 @@ class CreateReviewScreen extends StatefulWidget {
 }
 
 class _CreateReviewScreenState extends State<CreateReviewScreen> {
-  final TextEditingController _firstNameTEController = TextEditingController();
-  final TextEditingController _lastNameTEController = TextEditingController();
+  final TextEditingController _ratingTEController = TextEditingController();
   final TextEditingController _reviewTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -34,37 +33,6 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: _firstNameTEController,
-                  validator: (String? text) {
-                    if (text?.isEmpty ?? true) {
-                      return "Enter first name";
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: "First Name",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  validator: (String? text) {
-                    if (text?.isEmpty ?? true) {
-                      return "Enter last name";
-                    }
-                    return null;
-                  },
-                  controller: _lastNameTEController,
-                  decoration: const InputDecoration(
-                    hintText: "Last Name",
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
                   validator: (String? text) {
                     if (text?.isEmpty ?? true) {
                       return "Review field cannot be empty";
@@ -75,6 +43,24 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   maxLines: 5,
                   decoration: const InputDecoration(
                     hintText: "Write Reviews",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  validator: (String? text) {
+                    if (text?.isEmpty ?? true) {
+                      return "field cannot be empty";
+                    }
+                    return null;
+                  },
+                  controller: _ratingTEController,
+                  maxLines: 1,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    hintText: "Give Rating",
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -95,12 +81,10 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                           if (_formKey.currentState!.validate()) {
                             controller
                                 .createReview(_reviewTEController.text.trim(),
-                                    widget.productsId)
+                                    widget.productsId, int.parse(_ratingTEController.text.trim()))
                                 .then(
                               (result) {
                                 if (result) {
-                                  _firstNameTEController.clear();
-                                  _lastNameTEController.clear();
                                   _reviewTEController.clear();
                                   Get.snackbar('done', "review added done");
                                   Get.back(result: Get.find<ReviewListController>().getReview(widget.productsId));

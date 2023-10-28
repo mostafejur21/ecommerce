@@ -39,6 +39,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
   // ignore: unused_field
   int _selectedSizeIndex = 0;
   int _selectedColorIndex = 0;
+  int _quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
     );
   }
 
-  Column productsDetails(ProductsDetails productsDetails, List<String> colors) {
+  Column productsDetails(ProductsDetails productsDetails, List<String> colors,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -104,7 +105,9 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
               lowerLimit: 1,
               upperLimit: 20,
               value: 1,
-              onChanged: (value) {},
+              onChanged: (value) {
+                _quantity = value;
+              },
             ),
           ],
         ),
@@ -235,7 +238,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
   // }
 
   Container cartBottomContainer(
-      ProductsDetails productsDetails, List<String> color, List<String> size) {
+      ProductsDetails productsDetails, List<String> color, List<String> size,) {
     return Container(
       clipBehavior: Clip.hardEdge,
       height: 88,
@@ -286,7 +289,9 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
                       final results = await addToCartController.addToCart(
                           productsDetails.id!,
                           color[_selectedColorIndex].toString(),
-                          size[_selectedSizeIndex].toString());
+                          size[_selectedSizeIndex].toString(),
+                          _quantity,
+                      );
 
                       if (results) {
                         Get.snackbar("Success", "Add to cart success");
