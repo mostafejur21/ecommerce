@@ -73,6 +73,7 @@ class CartListTileCard extends StatelessWidget {
                           return IconButton(
                               onPressed: () async{
                                 bool delete = await deleteController.deleteCartId(cartData.productId!);
+                                Get.find<CartListController>().getCartList();
                                 if(delete){
                                   Get.snackbar("success", "products deleted successfully");
                                 }else{
@@ -104,7 +105,7 @@ class CartListTileCard extends StatelessWidget {
                           value: int.parse(cartData.qty!),
                             onChanged: (int value) {
                               Get.find<CartListController>()
-                                  .changeItem(cartData.id!, value);
+                                  .changeItem(cartData.productId!, value);
                             },
                           ),
                         ),
