@@ -45,6 +45,7 @@ CraftyBay integrates the following packages to enhance functionality:
 * `shared_preferences: ^2.2.1:` Shared Preferences is a Flutter package for persisting simple key-value data in a platform-agnostic manner. It's commonly used for storing app settings and small amounts of data.
 * `shimmer: ^3.0.0:` Shimmer is a package for adding a shimmering effect to your Flutter widgets. It's often used to create loading or placeholder animations to improve user experience.
 * `connectivity_plus: ^5.0.1:` Connectivity Plus is a Flutter package for monitoring network connectivity. It helps you check the status of the device's network connection and react to changes in connectivity.
+* `webview_flutter: ^4.4.1:` Webview Flutter is a package for displaying web content in your Flutter app. It's useful for integrating web-based features into your app.
   
 ## folder structure
 
@@ -63,6 +64,7 @@ craftyBay/
         │   │   ├── cart_list_model.dart
         │   │   ├── category_data.dart
         │   │   ├── category_model.dart
+        │   │   ├── check_out_model.dart
         │   │   ├── home_screen_slider_data.dart
         │   │   ├── home_screen_slider_model.dart
         │   │   ├── network_response.dart
@@ -71,6 +73,7 @@ craftyBay/
         │   │   ├── products_details_model.dart
         │   │   ├── products_model.dart
         │   │   ├── review_list_model.dart
+        │   │   ├── payment_method.dart
         │   │   └── user_read_profile_model.dart
         │   ├── services/
         │   │   └── network_caller.dart
@@ -85,6 +88,7 @@ craftyBay/
         │   │   ├── complete_profile_controller.dart
         │   │   ├── create_review_controller.dart
         │   │   ├── create_wish_list.dart
+        |   |   ├── check_out_controller.dart
         │   │   ├── delete_cart_list.dart
         │   │   ├── email_verification_controller.dart
         │   │   ├── home_screen_slider_controller.dart
@@ -105,6 +109,7 @@ craftyBay/
         │       │   │   └── otp_screen.dart
         │       │   ├── cart_screen.dart
         │       │   ├── categories_screen.dart
+        │       │   ├── check_out_screen.dart
         │       │   ├── create_review_screen.dart
         │       │   ├── home_screen.dart
         │       │   ├── item_screen.dart
@@ -112,6 +117,7 @@ craftyBay/
         │       │   ├── products_details_screen.dart
         │       │   ├── review_showing_screen.dart
         │       │   ├── splash_screen.dart
+        │       │   ├── web_view_screen.dart
         │       │   └── wish_list_screen.dart
         │       ├── utils/
         │       │   ├── app_color.dart
