@@ -1,5 +1,6 @@
 import 'package:ecommerce/data/models/cart_list_model.dart';
 import 'package:ecommerce/presentation/state_holders/cart_list_controller.dart';
+import 'package:ecommerce/presentation/ui/screen/checkout_screen.dart';
 import 'package:ecommerce/presentation/ui/utils/app_color.dart';
 import 'package:ecommerce/presentation/ui/widgets/cart_screen_list_tile_card.dart';
 import 'package:ecommerce/presentation/ui/widgets/custom_app_bar.dart';
@@ -94,7 +95,11 @@ class _CartScreenState extends State<CartScreen> {
                             SizedBox(
                               width: 120,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if(Get.find<CartListController>().cartListModel.data?.isNotEmpty ?? false){
+                                    Get.to(() => const CheckOutScreen());
+                                  }
+                                },
                                 child: const Text(
                                   "Check Out",
                                   style: TextStyle(fontSize: 12),

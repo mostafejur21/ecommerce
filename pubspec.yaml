@@ -22,6 +22,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   connectivity_plus: ^5.0.0
   shimmer: ^3.0.0
+  webview_flutter: ^4.4.1
 
   
 dev_dependencies:
